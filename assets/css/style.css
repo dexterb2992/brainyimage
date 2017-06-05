@@ -1,0 +1,82 @@
+section.target {
+    position: relative;
+    z-index: 16;
+    margin: 1rem auto;
+    padding: 0 0 1.6rem;
+    border: .2rem dashed #616778;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    -webkit-transition: color 0.2s ease-out, border-color 0.2s ease-out;
+    -moz-transition: color 0.2s ease-out, border-color 0.2s ease-out;
+    -o-transition: color 0.2s ease-out, border-color 0.2s ease-out;
+    -ms-transition: color 0.2s ease-out, border-color 0.2s ease-out;
+    transition: color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+section.target input[type="file"] {
+    position: absolute;
+    top: -16rem;
+    opacity: 0;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+span.size-before, .size-after {
+    float: left;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+.file-before, .file-after{
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.results {
+    border: 1px solid gray;
+    padding: 5px;
+    background: #d9a7c7;
+    background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);
+    background: linear-gradient(to right, #fffcdc, #d9a7c7);
+}
+
+.results .entry {
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background: rgba(204, 204, 204, 0.19);
+    border: 1px solid #cfdbde;
+}
+
+.size-diff {
+    margin-left: 5px;
+}
+
+.download-link {
+    color: black;
+}

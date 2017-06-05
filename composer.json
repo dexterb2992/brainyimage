@@ -1,0 +1,9 @@
+{
+	"name": "Brainy Image",
+	"autoload": {
+	    "psr-4": {
+	    	"App\\lib\\": "lib",
+	    	"App\\lib\\traits\\": "lib/traits"
+	    }
+	}
+}

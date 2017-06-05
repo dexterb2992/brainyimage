@@ -1,0 +1,4 @@
+/vendor
+/uploads/source
+/uploads/output
+*.log

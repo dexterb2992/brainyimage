@@ -24,10 +24,10 @@
             </div>
         </div>
 
-        <div class="mt-3">
+        <div class="mt-3 text-center">
             <h1>Smart PNG and JPEG compression</h1>
         </div>
-        <p class="lead"><?= APP_NAME;?> uses smart lossy compression techniques to reduce the file size of your PNG files. By selectively decreasing the number of colors in the image, fewer bytes are required to store the data. The effect is nearly invisible but it makes a very large difference in file size!</p>
+        <p class="lead text-center"><?= APP_NAME;?> uses smart lossy compression techniques to reduce the file size of your PNG files. By selectively decreasing the number of colors in the image, fewer bytes are required to store the data. The effect is nearly invisible but it makes a very large difference in file size!</p>
     </div>
     <div class="clear"></div>
     <br/>

@@ -105,7 +105,7 @@ jQuery(document).ready(function () {
 						var pct = (evt.loaded / evt.total) * 100;
 						console.log("Upload progres.."+pct+"%");
 
-						progressbar.css({"width": pct+"%"}).html(pct+'%');							
+						progressbar.css({"width": pct+"%"}).html(number_format(pct)+'%');							
 					}
 					else {
 						console.warn('1. Content Length not reported!');
@@ -174,7 +174,7 @@ jQuery(document).ready(function () {
 
 		for (var i = files.length - 1; i >= 0; i--) {
 			
-	       	var $entry = $("<div class='entry list-group-item' id='entry_"+files[i]['name']+"'></div>");
+	       	var $entry = $("<div class='entry' id='entry_"+files[i]['name']+"'></div>");
 	       	var $row = $('<div class="row"></div>');
 	       	var $file_before = $('<div class="col-md-3 file-before"></div>');
 	       	var $file_progress = $('<div class="col-md-6 row file-progress">'+
@@ -188,12 +188,12 @@ jQuery(document).ready(function () {
 	       	var $file_after = $('<div class="col-md-3 file-after"></div>');
 
 	       	var $span_size_before = $('<span class="size-before badge badge-info">'+formatSizeUnits(files[i]['size'])+'</span>');
-	        var $span_size_after = $('<span class="size-after badge badge-info"></span>');
-	        var $span_size_diff = $('<span class="size-diff"></span>');
+	        var $span_size_after = $('<span class="size-after badge badge-primary"></span>');
+	        var $span_size_diff = $('<span class="size-diff badge badge-danger"></span>');
 	        var $span_progress = $('<span class="progress">'+
                 '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
             '</span>');
-            var $download_link = $('<a class="download-link" href="#" download><a>');
+            var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="#" download><a>');
 
 	        $file_before.append( $('<span>'+files[i]['name']+'</span>') );
 
@@ -216,13 +216,11 @@ jQuery(document).ready(function () {
 	});
 
 	$(".btn-file").click(function (){
-		// console.log($(this).children('input:first'));
 		$("#file_handle", this).click();
 	});
 
 	$("#file_handle").click(function (e){
 		e.stopImmediatePropagation();
-		console.log("dexter gwapo");
 	});
 	
 	// File upload progress event listener

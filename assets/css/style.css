@@ -1,4 +1,17 @@
+.bg-bluesh{
+    background: #1c92d2;
+    background: -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);
+    background: linear-gradient(to right, #f2fcfe, #1c92d2);
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+
+footer a {
+    color: black;
+}
+
 section.target {
+    max-width: 700px;
     position: relative;
     z-index: 16;
     margin: 1rem auto;
@@ -44,7 +57,7 @@ section.target input[type="file"] {
     display: none;
 }
 
-span.size-before, .size-after {
+span.size-before {
     float: left;
     display: block;
     font-size: 0.8rem;
@@ -52,17 +65,13 @@ span.size-before, .size-after {
 }
 
 .file-before, .file-after{
-    color: black;
     font-weight: bold;
-    font-size: 0.9rem;
+    overflow: hidden;
 }
 
 .results {
-    border: 1px solid gray;
+    border: 1px solid rgba(204, 204, 204, 0.64);
     padding: 5px;
-    background: #d9a7c7;
-    background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);
-    background: linear-gradient(to right, #fffcdc, #d9a7c7);
 }
 
 .results .entry {
@@ -75,8 +84,5 @@ span.size-before, .size-after {
 
 .size-diff {
     margin-left: 5px;
-}
-
-.download-link {
-    color: black;
+    float: right;
 }

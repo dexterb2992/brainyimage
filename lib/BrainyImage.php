@@ -48,10 +48,14 @@ class BrainyImage {
 			}else{
 				$this->error = 'Error in uploading few files. File type is not allowed.';
 			}
-		
+			$results['info'] = $tmp_name;
 		}
 
-		if( $this->error != "" ) $results["error"] = $this->error;
+		if( $this->error != "" ){
+			$results["error"] = $this->error;
+			$results['success'] = 0;
+			
+		}
 		
 
 		return $results;	

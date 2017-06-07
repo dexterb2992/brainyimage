@@ -20,4 +20,13 @@ class Helper{
 
 	    return $bytes;
 	}
+
+	public static function getPNGQuantPath(){
+		// if( file_get_contents("env.php") == "development" ){
+		// 	return "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe";
+		// }
+
+		$path = __DIR__."\pngquant\pngquant.exe";
+		return	 $escaped = preg_replace('/\\\\/','\\\\\\\\',$path);
+	}
 }

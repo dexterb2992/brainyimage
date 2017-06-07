@@ -32,4 +32,5 @@
     <div class="clear"></div>
     <br/>
     <br/>
+   
     <?php include "views/partials/_footer.php"; ?>

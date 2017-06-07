@@ -67,17 +67,62 @@ class BrainyImage {
 		$info = getimagesize($source_photo);
 
 		if ($info['mime'] == 'image/jpeg'){
-			// $dest_photo.= '.jpg';
-			$d = $this->compressJPEG($source_photo, $dest_photo, 90);
+			$d = $this->compressJPEG($source_photo, $dest_photo, 85);
+
+			if( $d != false ){
+				return $this->returnSizeDifference($source_photo, $dest_photo, $info);
+			}else{
+				return json_encode(array(
+					"error" => "Something went wrong while trying to compress a JPEG file.", 
+					"success" => 0)
+				);
+			}
+
 		}else if($info['mime'] == 'image/png'){
-			// $dest_photo.= '.png';
 			$dest_photo = 'uploads/output/'.time().".png";
 			$d = $this->compressPNG($source_photo, $dest_photo, 90);
+			echo $d;
+			if( is_array($d) ){
+				return $d;
+			}else{
+				return $this->returnSizeDifference($source_photo, $dest_photo, $info);
+			}
 		}
 
 
-		$old_size = filesize($source_photo);
-		$new_size = filesize($dest_photo);
+		// $old_size = @filesize($source_photo);
+		// $new_size = @filesize($dest_photo);
+		// $size_difference = $old_size - $new_size;
+
+		// $percentage_saved = (($size_difference)/$old_size)*100;
+
+		// if( $new_size > $old_size ){
+		// 	$new_size = $old_size;
+		// 	$dest_photo = $source_photo;
+		// 	$percentage_saved = 0;
+		// }
+
+		// $results = array(
+		// 	"success" => 1,
+		// 	"input" => array(
+		// 		"size" => Helper::formatSizeUnits($old_size),
+		// 		"filename" => $this->filename,
+		// 		"type" => $info['mime']
+		// 	),
+		// 	"output" => array(
+		// 		"size" => Helper::formatSizeUnits($new_size),
+		// 		"type" => $info['mime'],
+		// 		"url" => $dest_photo,
+		// 		"diff" => round($percentage_saved, 2).'%'
+		// 	)
+		// );
+
+		// return $results;
+	}
+
+	public function returnSizeDifference($source_photo, $dest_photo, $info){
+		$old_size = @filesize($source_photo);
+		$new_size = @filesize($dest_photo);
 		$size_difference = $old_size - $new_size;
 
 		$percentage_saved = (($size_difference)/$old_size)*100;

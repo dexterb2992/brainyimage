@@ -72,7 +72,17 @@ jQuery(document).ready(function () {
 		element.ondragend = function () { return false; };
 		element.ondrop = function (e) { 
 			e.preventDefault();
-			ajax_upload(e.dataTransfer.files);
+			$("#results").removeClass("hidden");
+			// ajax_upload(e.dataTransfer.files);
+			// $('.btn-file :file').trigger("change");
+			var files = e.dataTransfer.files;
+			for (var i = files.length - 1; i >= 0; i--) {
+			
+		       	$entry = generateHTMLEntries(files, i);
+
+				singleUpload(files[i], $entry);
+				$entry = "";
+			}
 		}  		
 	}
 	
@@ -167,6 +177,46 @@ jQuery(document).ready(function () {
 		})();
 	}
 
+	function generateHTMLEntries(files, i){
+		var $entry = $("<div class='entry' id='entry_"+files[i]['name']+"'></div>");
+       	var $row = $('<div class="row"></div>');
+       	var $file_before = $('<div class="col-md-3 file-before"></div>');
+       	var $file_progress = $('<div class="col-md-6 row file-progress">'+
+       		'<div class="col-md-3 col-sm-3">'+
+            '</div>'+
+            '<div class="col-md-6 col-sm-6">'+
+            '</div>'+
+            '<div class="col-md-3 col-sm-3">'+
+            '</div>'+
+       		+'</div>');
+       	var $file_after = $('<div class="col-md-3 file-after"></div>');
+
+       	var $span_size_before = $('<span class="size-before badge badge-info">'+formatSizeUnits(files[i]['size'])+'</span>');
+        var $span_size_after = $('<span class="size-after badge badge-primary"></span>');
+        var $span_size_diff = $('<span class="size-diff badge badge-danger"></span>');
+        var $span_progress = $('<span class="progress">'+
+            '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
+        '</span>');
+        var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="#" download><a>');
+
+        $file_before.append( $('<span>'+files[i]['name']+'</span>') );
+
+       	$file_progress.children('div:first').append( $span_size_before );
+       	$file_progress.children('div:nth-child(2)').append($span_progress);
+       	$file_progress.children('div:last').append($span_size_after);
+
+       	$file_after.append($download_link);
+       	$file_after.append($span_size_diff);
+
+       	$row.append( $file_before );
+       	$row.append( $file_progress );
+       	$row.append( $file_after );
+
+       	$entry.append( $row );
+
+       	return $entry;
+	}
+
 	// Call AJAX upload function on image selection using file browser button
 	$(document).on('change', '.btn-file :file', function() {
 		$("#results").removeClass("hidden");
@@ -174,41 +224,7 @@ jQuery(document).ready(function () {
 
 		for (var i = files.length - 1; i >= 0; i--) {
 			
-	       	var $entry = $("<div class='entry' id='entry_"+files[i]['name']+"'></div>");
-	       	var $row = $('<div class="row"></div>');
-	       	var $file_before = $('<div class="col-md-3 file-before"></div>');
-	       	var $file_progress = $('<div class="col-md-6 row file-progress">'+
-	       		'<div class="col-md-3 col-sm-3">'+
-                '</div>'+
-                '<div class="col-md-6 col-sm-6">'+
-                '</div>'+
-                '<div class="col-md-3 col-sm-3">'+
-                '</div>'+
-	       		+'</div>');
-	       	var $file_after = $('<div class="col-md-3 file-after"></div>');
-
-	       	var $span_size_before = $('<span class="size-before badge badge-info">'+formatSizeUnits(files[i]['size'])+'</span>');
-	        var $span_size_after = $('<span class="size-after badge badge-primary"></span>');
-	        var $span_size_diff = $('<span class="size-diff badge badge-danger"></span>');
-	        var $span_progress = $('<span class="progress">'+
-                '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
-            '</span>');
-            var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="#" download><a>');
-
-	        $file_before.append( $('<span>'+files[i]['name']+'</span>') );
-
-	       	$file_progress.children('div:first').append( $span_size_before );
-	       	$file_progress.children('div:nth-child(2)').append($span_progress);
-	       	$file_progress.children('div:last').append($span_size_after);
-
-	       	$file_after.append($download_link);
-	       	$file_after.append($span_size_diff);
-
-	       	$row.append( $file_before );
-	       	$row.append( $file_progress );
-	       	$row.append( $file_after );
-
-	       	$entry.append( $row );
+	       	$entry = generateHTMLEntries(files, i);
 
 			singleUpload(files[i], $entry);
 			$entry = "";

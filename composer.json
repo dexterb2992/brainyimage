@@ -5,5 +5,8 @@
 	    	"App\\lib\\": "lib",
 	    	"App\\lib\\traits\\": "lib/traits"
 	    }
+	},
+	"require": {
+		"bensquire/php-image-optim": "dev-master"
 	}
 }

@@ -128,6 +128,8 @@ jQuery(document).ready(function () {
 							.removeClass("bg-info").addClass("bg-success");
 
 						compressImage(data, $el);
+					}else{
+						ajax_msg(false, 'An error has occured while uploading photo.'); 
 					}
 				},
 				error : function(data){
@@ -170,8 +172,20 @@ jQuery(document).ready(function () {
 						$el.find('.size-after').html(response.output.size);
 						$el.find('.size-diff').html("-"+response.output.diff);
 						$el.find(".download-link").attr("href", response.output.url).html('download');
+					}else{
+						if( response.hasOwnProperty('error') && response.hasOwnProperty('error_description') ){
+							$el.find('.size-after').html(response.error_description)
+								.removeClass('badge-primary').addClass("badge-danger");
+							$el.find(".download-link").remove();
+							ajax_msg(false, response.error);
+						}else{
+							ajax_msg(false, 'An error has occured while compressing your image.');
+						}
 					}
 					
+				},
+				error: function (){
+					ajax_msg(false, 'An error has occured while requesting to compress an image.');
 				}
 			});
 		})();

@@ -25,4 +25,14 @@ include('vendor/autoload.php');
 //     ->chainCommand($pngOut);
 // $optim->optimise();
 
-phpinfo();
+phpinfo(); die;
+
+chdir("/etc/apt/");
+
+$output = null;
+// system("cd /home/imdog/public_html/brainyimage/pngquant/", $output);
+var_dump($output);
+
+system("/home/imdog/public_html/brainyimage/pngquant/pngquant.exe", $output);
+
+var_dump($output);

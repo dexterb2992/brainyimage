@@ -7,7 +7,7 @@ use App\lib\Helper;
 class BrainyImage {
 	use ImageCompressor;
 
-	function __construct($dir = 'uploads/source/', $extensions = array("jpeg","jpg","png"))
+	function __construct($dir = 'uploads/source/', $extensions = array("image/jpeg","image/png"))
 	{
 		$this->error = '';
 		$this->img = '';
@@ -19,8 +19,12 @@ class BrainyImage {
 	}
 
 	public function upload($file){
+		// var_dump($file);
 		foreach($file['img_file']['tmp_name'] as $key => $tmp_name ){
-			$filename = $file['img_file']['name'][$key];
+			// $filename = str_replace(' ', '-', $file['img_file']['name'][$key]);
+			// clean the filename
+			$filename = preg_replace( '/[^a-z0-9.]+/', '_', strtolower( $file['img_file']['name'][$key] ) );
+
 			$file_size =$file['img_file']['size'][$key];
 			$file_tmp =$file['img_file']['tmp_name'][$key];
 			$file_type=$file['img_file']['type'][$key];
@@ -33,7 +37,7 @@ class BrainyImage {
 			$results = array();
 
 
-			if(in_array($file_ext,$this->extensions ) === true)
+			if(in_array($file_type,$this->extensions ) === true)
 			{
 				if(move_uploaded_file($file_tmp, $this->dir.$filename))
 				{
@@ -49,6 +53,7 @@ class BrainyImage {
 				$this->error = 'Error in uploading few files. File type is not allowed.';
 			}
 			$results['info'] = $tmp_name;
+			$results['filetype'] = $file_type;
 		}
 
 		if( $this->error != "" ){
@@ -79,9 +84,13 @@ class BrainyImage {
 			}
 
 		}else if($info['mime'] == 'image/png'){
-			$dest_photo = 'uploads/output/'.time().".png";
+			// $dest_photo = 'uploads/output/'.time().".png";
+			$uniqueId = uniqid(rand(), true);
+			mkdir('uploads/output/'.$uniqueId);
+			$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;
+
 			$d = $this->compressPNG($source_photo, $dest_photo, 90);
-			echo $d;
+			
 			if( is_array($d) ){
 				return $d;
 			}else{

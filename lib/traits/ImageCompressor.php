@@ -26,8 +26,8 @@ trait ImageCompressor {
 		$instance = new PNGQuant();
 
 		// Change the path to the binary of pngquant, for example in windows would be (with an example path):
-		// $instance->setBinaryPath("E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe")
-		$instance->setBinaryPath("/home/imdog/public_html/brainyimage/pngquant/pngquant.exe")
+		$instance->setBinaryPath("E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe")
+		// $instance->setBinaryPath("/usr/local/bin/pngquant")
 			->execute();
 
 		// Set the path to the image to compress
@@ -54,7 +54,10 @@ trait ImageCompressor {
 		}else{
 		    return array(
 		    	"success" => 0, 
-		    	"error" => "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code]
+		    	"source_path" => $source_path,
+		    	"file_info" => parse_url($source_path), 
+		    	"error" => "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code],
+		    	'error_description' => $instance->getErrorTable()[(string) $exit_code]
 		    );
 		}
 	}	

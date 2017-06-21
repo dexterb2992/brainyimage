@@ -1,38 +1,18 @@
-<?php
-include('vendor/autoload.php');
-
-// $advPng = new \PHPImageOptim\Tools\Png\AdvPng();
-// $advPng->setBinaryPath('/usr/local/bin/advpng');
-
-// $optiPng = new \PHPImageOptim\Tools\Png\OptiPng();
-// $optiPng->setBinaryPath('/usr/local/bin/optipng');
-
-// $pngOut = new \PHPImageOptim\Tools\Png\PngOut();
-// $pngOut->setBinaryPath('/usr/bin/pngout');
-
-// $pngCrush = new \PHPImageOptim\Tools\Png\PngCrush();
-// $pngCrush->setBinaryPath('/usr/local/bin/pngcrush');
-
-// $pngQuant = new \PHPImageOptim\Tools\Png\PngQuant();
-// $pngQuant->setBinaryPath('/usr/local/bin/pngquant');
-
-// $optim = new \PHPImageOptim();
-// $optim->setImage('uploads/source/test1.jpg');
-// $optim->chainCommand($pngQuant)
-//     ->chainCommand($advPng)
-//     ->chainCommand($optiPng)
-//     ->chainCommand($pngCrush)
-//     ->chainCommand($pngOut);
-// $optim->optimise();
-
-phpinfo(); die;
-
-chdir("/etc/apt/");
-
-$output = null;
-// system("cd /home/imdog/public_html/brainyimage/pngquant/", $output);
-var_dump($output);
-
-system("/home/imdog/public_html/brainyimage/pngquant/pngquant.exe", $output);
-
-var_dump($output);
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<ul>
+	<?php $data = [1,2,3,4,5,6,7,8,9]; ?>
+		<script type="text/javascript">
+			var data = [1,2,3,4,5,6,7,8,9];
+			var x = 0; 
+			<# for(x = 0; x < data.length; x++ ){ #>
+				<li>ID: <# data[x]; #></li>
+			<# } #>
+		</script>
+	</ul>
+</body>
+</html>

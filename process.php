@@ -21,6 +21,10 @@ class AjaxProcessImage{
 
 					$this->compress($_POST['src'], $_POST['filename']);
 					break;
+
+				case 'retry':
+					$this->retry($_POST['src'], $_POST['filename']);
+					break;
 			}
 		}
 
@@ -42,6 +46,10 @@ class AjaxProcessImage{
 		$res = $this->brainyImage->compressUploaded($src, $filename);
 
 		echo json_encode($res);
+	}
+
+	public function retry($src, $filename = ""){
+		return $this->compress($src, $filename);
 	}
 }
 

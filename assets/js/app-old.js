@@ -1,169 +1,98 @@
-(function (brainyImage){
-	brainyImage(window, document, window.jQuery);
-}(function brainyImage(window, document, $){
-	$(function (){
-		initialize();
+function number_format (number, decimals, decPoint, thousandsSep) { // eslint-disable-line camelcase
+  number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number;
+  var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+  var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep;
+  var dec = (typeof decPoint === 'undefined') ? '.' : decPoint;
+  var s = '';
+  var toFixedFix = function (n, prec) {
+    var k = Math.pow(10, prec);
+    return '' + (Math.round(n * k) / k)
+      .toFixed(prec);
+  }
+  // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
 
-		var img_zone = document.getElementById('img-zone'),		
-		collect = {
-			filereader: typeof FileReader != 'undefined',
-			zone: 'draggable' in document.createElement('span'),
-			formdata: !!window.FormData
-		}, 
-		acceptedTypes = {
-			'image/png': true,
-			'image/jpeg': true,
-			'image/jpg': true
-		};
-		
-		// Function to show messages
-		function ajax_msg(status, msg) {
-			var the_msg = '<div class="alert alert-'+ (status ? 'success' : 'danger') +'">';
-			the_msg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-			the_msg += msg;
-			the_msg += '</div>';
-			$(the_msg).insertBefore(img_zone);
-		}
-		
-		// Call AJAX upload function on drag and drop event
-		function dragHandle(element) {
-			element.ondragover = function () { return false; };
-			element.ondragend = function () { return false; };
-			element.ondrop = function (e) { 
-				e.preventDefault();
-				$("#results").removeClass("hidden");
-				// ajax_upload(e.dataTransfer.files);
-				// $('.btn-file :file').trigger("change");
-				var files = e.dataTransfer.files;
-				for (var i = files.length - 1; i >= 0; i--) {
-				
-			       	$entry = generateHTMLEntries(files, i);
+function formatSizeUnits(bytes){
+	var ext = 'byte';
+    if (bytes >= 1073741824){
+        bytes = number_format((bytes/1073741824), 2);
+        ext = 'GB';
+    }else if (bytes >= 1048576){
+        bytes = number_format((bytes/1048576), 2);
+        ext = 'MB';
+    }else if (bytes >= 1024){
+        bytes = number_format((bytes/1024), 2);
+        ext = 'KB';
+    }else if (bytes > 1){
+        ext = 'bytes';
+    }else if (bytes == 1){
+        ext = 'byte';
+    }else{
+        bytes = '0';
+    }
 
-					singleUpload(files[i], $entry);
-					$entry = "";
-				}
-			}  		
-		}
-		
-		if (collect.zone) {  		
-			dragHandle(img_zone);
-		} 
-		else {
-			alert("Drag & Drop isn't supported, use Open File Browser to upload photos.");			
-		}
+    return bytes+' '+ext;
+}
 
-		// Call AJAX upload function on image selection using file browser button
-		$(document).on('change', '.btn-file :file', function() {
+jQuery(document).ready(function () {
+	$('[data-toggle="tooltip"]').tooltip();
+
+	var img_zone = document.getElementById('img-zone'),		
+	collect = {
+		filereader: typeof FileReader != 'undefined',
+		zone: 'draggable' in document.createElement('span'),
+		formdata: !!window.FormData
+	}, 
+	acceptedTypes = {
+		'image/png': true,
+		'image/jpeg': true,
+		'image/jpg': true
+	};
+	
+	// Function to show messages
+	function ajax_msg(status, msg) {
+		var the_msg = '<div class="alert alert-'+ (status ? 'success' : 'danger') +'">';
+		the_msg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+		the_msg += msg;
+		the_msg += '</div>';
+		$(the_msg).insertBefore(img_zone);
+	}
+	
+	// Call AJAX upload function on drag and drop event
+	function dragHandle(element) {
+		element.ondragover = function () { return false; };
+		element.ondragend = function () { return false; };
+		element.ondrop = function (e) { 
+			e.preventDefault();
 			$("#results").removeClass("hidden");
-			var files = this.files;
-
+			// ajax_upload(e.dataTransfer.files);
+			// $('.btn-file :file').trigger("change");
+			var files = e.dataTransfer.files;
 			for (var i = files.length - 1; i >= 0; i--) {
-				
+			
 		       	$entry = generateHTMLEntries(files, i);
 
 				singleUpload(files[i], $entry);
 				$entry = "";
-			}		
-		});
-
-		$(document).on("click", '.btn-retry', function (){
-			var $this = $(this);
-			var $el = $this.parents(".entry:first");
-
-			var files = [{'name': $this.attr("data-url")}]
-			
-			var entry = generateHTMLEntries(files, 0);
-
-			$el.append(entry);
-
-			initialize();
-		});
-
-		$(document).on("click", ".view-image-diff", function (){
-			$("#image_difference_modal").modal();
-		});
-
-		$(".btn-file").click(function (){
-			$("#file_handle", this).click();
-		});
-
-		$("#file_handle").click(function (e){
-			e.stopImmediatePropagation();
-		});
-		
-		// File upload progress event listener
-		(function($, window, undefined) {
-			var hasOnProgress = ("onprogress" in $.ajaxSettings.xhr());
-		
-			if (!hasOnProgress) {
-				return;
 			}
-			
-			var oldXHR = $.ajaxSettings.xhr;
-			$.ajaxSettings.xhr = function() {
-				var xhr = oldXHR();
-				if(xhr instanceof window.XMLHttpRequest) {
-					xhr.addEventListener('progress', this.progress, false);
-				}
-				
-				if(xhr.upload) {
-					xhr.upload.addEventListener('progress', this.progress, false);
-				}
-				
-				return xhr;
-			};
-		})(jQuery, window);	
-	});
-
-	function initialize(){
-		$('[data-toggle="tooltip"]').tooltip();
+		}  		
 	}
-
-	// rest of the codes here
-	function number_format (number, decimals, decPoint, thousandsSep) { // eslint-disable-line camelcase
-	  number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-	  var n = !isFinite(+number) ? 0 : +number;
-	  var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
-	  var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep;
-	  var dec = (typeof decPoint === 'undefined') ? '.' : decPoint;
-	  var s = '';
-	  var toFixedFix = function (n, prec) {
-	    var k = Math.pow(10, prec);
-	    return '' + (Math.round(n * k) / k)
-	      .toFixed(prec);
-	  }
-	  // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
-	  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-	  if (s[0].length > 3) {
-	    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-	  }
-	  if ((s[1] || '').length < prec) {
-	    s[1] = s[1] || '';
-	    s[1] += new Array(prec - s[1].length + 1).join('0');
-	  }
-	  return s.join(dec);
-	}
-
-	function formatSizeUnits(bytes){
-		var ext = 'byte';
-	    if (bytes >= 1073741824){
-	        bytes = number_format((bytes/1073741824), 2);
-	        ext = 'GB';
-	    }else if (bytes >= 1048576){
-	        bytes = number_format((bytes/1048576), 2);
-	        ext = 'MB';
-	    }else if (bytes >= 1024){
-	        bytes = number_format((bytes/1024), 2);
-	        ext = 'KB';
-	    }else if (bytes > 1){
-	        ext = 'bytes';
-	    }else if (bytes == 1){
-	        ext = 'byte';
-	    }else{
-	        bytes = '0';
-	    }
-
-	    return bytes+' '+ext;
+	
+	if (collect.zone) {  		
+		dragHandle(img_zone);
+	} 
+	else {
+		alert("Drag & Drop isn't supported, use Open File Browser to upload photos.");			
 	}
 
 	function singleUpload(file, $el){
@@ -258,8 +187,6 @@
 							ajax_msg(false, 'An error has occured while compressing your image.');
 						}
 					}
-
-					initialize();
 					
 				},
 				error: function (){
@@ -292,7 +219,7 @@
         var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);"><a>'+
         		'<a class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
 
-        var $view_diff = $('<a href="javascript:void(0)" data-toggle="tooltip" data-original-title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');
+        var $view_diff = $('<a href="javascript:void(0)" data-toggle="tooltip" data-original-title="View image difference" class="label text-white view-image-diff view-image-diff"><i class="fa fa-eye"></i></a>');
 
         $file_before.append( $('<span>'+files[i]['name']+'</span>') );
 
@@ -313,4 +240,60 @@
 
        	return $entry;
 	}
-}));
+
+	// Call AJAX upload function on image selection using file browser button
+	$(document).on('change', '.btn-file :file', function() {
+		$("#results").removeClass("hidden");
+		var files = this.files;
+
+		for (var i = files.length - 1; i >= 0; i--) {
+			
+	       	$entry = generateHTMLEntries(files, i);
+
+			singleUpload(files[i], $entry);
+			$entry = "";
+		}		
+	});
+
+	$(document).on("click", '.btn-retry', function (){
+		var $this = $(this);
+		var $el = $this.parents(".entry:first");
+
+		var files = [{'name': $this.attr("data-url")}]
+		
+		var entry = generateHTMLEntries(files, 0);
+
+		$el.append(entry);
+	});
+
+	$(".btn-file").click(function (){
+		$("#file_handle", this).click();
+	});
+
+	$("#file_handle").click(function (e){
+		e.stopImmediatePropagation();
+	});
+	
+	// File upload progress event listener
+	(function($, window, undefined) {
+		var hasOnProgress = ("onprogress" in $.ajaxSettings.xhr());
+	
+		if (!hasOnProgress) {
+			return;
+		}
+		
+		var oldXHR = $.ajaxSettings.xhr;
+		$.ajaxSettings.xhr = function() {
+			var xhr = oldXHR();
+			if(xhr instanceof window.XMLHttpRequest) {
+				xhr.addEventListener('progress', this.progress, false);
+			}
+			
+			if(xhr.upload) {
+				xhr.upload.addEventListener('progress', this.progress, false);
+			}
+			
+			return xhr;
+		};
+	})(jQuery, window);	
+});

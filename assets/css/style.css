@@ -86,3 +86,21 @@ span.size-before {
     margin-left: 5px;
     float: right;
 }
+
+.btn-retry {
+    margin-left: 5px;
+}
+
+.entry .entry {
+    border-style: dashed;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    padding: 5px;
+    margin-top: 6px;
+    background: transparent;
+}
+
+.entry .entry .row:first-child {
+    padding-left: 10px;
+}

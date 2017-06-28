@@ -13,8 +13,7 @@
                         <figure class="icon"></figure>
                         <h4>Drop your .png or .jpg files here!</h4>
                         <p><small>Up to 20 images, max 5 MB each.</small></p>
-                        <!-- <input type="file" multiple="multiple"> -->
-                        <h2><i class="glyphicon glyphicon-camera"></i></h2>
+                        <h2><i class="fa fa-cloud-upload"></i></h2>
                         <span class="btn btn-success btn-file">
                         Click to Open File Browser<input type="file" id="file_handle" multiple="multiple" accept="image/*">
                         </span>
@@ -32,5 +31,23 @@
     <div class="clear"></div>
     <br/>
     <br/>
-   
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="image_difference_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal title</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <?php include "views/partials/_footer.php"; ?>

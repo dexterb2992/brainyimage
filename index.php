@@ -43,7 +43,7 @@
                         <div class="col-md-6">
                             <div class="thumbnail image-original">
                                 <img src="..." alt="...">
-                                <div class="caption">
+                                <div class="caption"><br/>
                                     <h4>Original</h4>
                                     <p class="size">...</p>
                                 </div>
@@ -52,7 +52,7 @@
                         <div class="col-md-6">
                             <div class="thumbnail image-optimized">
                                 <img src="..." alt="...">
-                                <div class="caption">
+                                <div class="caption"><br/>
                                     <h4>Optimized</h4>
                                     <p class="size">...</p>
                                 </div>

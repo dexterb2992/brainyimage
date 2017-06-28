@@ -26,6 +26,8 @@ class CronJob{
 		    }else{
 		    	$str.= "(failed: filetime: ".filemtime($file).", current_time: $current_time)";
 		    }
+
+		    $this->pre($str);
 		}
 	}
 

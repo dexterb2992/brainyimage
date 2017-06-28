@@ -1,4 +1,9 @@
 <?php 
+namespace App;  
+
+require_once "conf.php";
+
+use App\lib\Helper;
 
 class CronJob{
 	function __construct()
@@ -18,7 +23,7 @@ class CronJob{
 			$current_time = time() - (60 * 60 * 24 * 2);
 		    if (filemtime($file) < $current_time ) {
 		        if (is_dir($file)){
-		        	rmdir($file);
+		        	Helper::rrmdir($file);
 		        }elseif (is_file($file)){
 		        	unlink($file);
 		        }
@@ -27,13 +32,11 @@ class CronJob{
 		    	$str.= "(failed: filetime: ".filemtime($file).", current_time: $current_time)";
 		    }
 
-		    $this->pre($str);
+		    Helper::pre($str);
 		}
 	}
 
-	public function pre($str){
-		echo '<pre>'; print_r($str); echo '</pre>';
-	}
+	
 }
 
 new CronJob();

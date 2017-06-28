@@ -22,11 +22,27 @@ class Helper{
 	}
 
 	public static function getPNGQuantPath(){
-		// if( file_get_contents("env.php") == "development" ){
-		// 	return "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe";
-		// }
-
 		$path = __DIR__."\pngquant\pngquant.exe";
 		return	 $escaped = preg_replace('/\\\\/','\\\\\\\\',$path);
 	}
+
+	// When the directory is not empty:
+	public static function rrmdir($dir) {
+		if (is_dir($dir)) {
+			$objects = scandir($dir);
+			foreach ($objects as $object) {
+				if ($object != "." && $object != "..") {
+					if (filetype($dir."/".$object) == "dir") self::rrmdir($dir."/".$object); 
+					else unlink($dir."/".$object);
+				}
+			}
+			reset($objects);
+			rmdir($dir);
+		}
+	}
+
+	public static function pre($str){
+		echo '<pre>'; print_r($str); echo '</pre>';
+	}
+
 }

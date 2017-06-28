@@ -4,6 +4,8 @@ namespace App\lib\traits;
 use App\lib\PNGQuant;
 use App\lib\Helper;
 
+// include( dirname(dirname(__DIR__))."/conf.php" );
+
 trait ImageCompressor {
 
 	public function compressJPEG($source_path, $destination_url, $quality){
@@ -26,8 +28,9 @@ trait ImageCompressor {
 		$instance = new PNGQuant();
 
 		// Change the path to the binary of pngquant, for example in windows would be (with an example path):
-		$instance->setBinaryPath("E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe")
+		// $instance->setBinaryPath("E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe")
 		// $instance->setBinaryPath("/usr/local/bin/pngquant")
+		$instance->setBinaryPath(env("pngquant"))
 			->execute();
 
 		// Set the path to the image to compress
@@ -63,3 +66,10 @@ trait ImageCompressor {
 	}	
 
 }
+
+
+// /usr/bin/jpegtran
+// /usr/local/bin/jpegoptim
+// /usr/local/bin/optipng
+// /usr/bin/pngcrush
+// /usr/bin/pngout

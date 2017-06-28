@@ -27,12 +27,9 @@ class AjaxProcessImage{
 					break;
 			}
 		}
-
-		
-		
 	}
 
-	public function upload($files){
+	private function upload($files){
 		if( isset($files['img_file']) ){
 			$response = $this->brainyImage->upload($files);
 		}else{
@@ -42,13 +39,13 @@ class AjaxProcessImage{
 		echo json_encode($response);
 	}
 
-	public function compress($src, $filename = ""){
+	private function compress($src, $filename = ""){
 		$res = $this->brainyImage->compressUploaded($src, $filename);
 
 		echo json_encode($res);
 	}
 
-	public function retry($src, $filename = ""){
+	private function retry($src, $filename = ""){
 		return $this->compress($src, $filename);
 	}
 }

@@ -104,3 +104,7 @@ span.size-before {
 .entry .entry .row:first-child {
     padding-left: 10px;
 }
+
+.image-optimized img, .image-original img {
+    max-height: 350px;
+}

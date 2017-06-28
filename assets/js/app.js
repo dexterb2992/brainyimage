@@ -16,15 +16,6 @@
 			'image/jpg': true
 		};
 		
-		// Function to show messages
-		function ajax_msg(status, msg) {
-			var the_msg = '<div class="alert alert-'+ (status ? 'success' : 'danger') +'">';
-			the_msg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-			the_msg += msg;
-			the_msg += '</div>';
-			$(the_msg).insertBefore(img_zone);
-		}
-		
 		// Call AJAX upload function on drag and drop event
 		function dragHandle(element) {
 			element.ondragover = function () { return false; };
@@ -53,7 +44,7 @@
 		}
 
 		// Call AJAX upload function on image selection using file browser button
-		$(document).on('change', '.btn-file :file', function() {
+		$(document).on('change', '#file_handle', function() {
 			$("#results").removeClass("hidden");
 			var files = this.files;
 
@@ -80,11 +71,27 @@
 		});
 
 		$(document).on("click", ".view-image-diff", function (){
-			$("#image_difference_modal").modal();
+			var $this = $(this), $modal = $("#image_difference_modal");
+
+			var $originalDiv = $modal.find(".image-original");
+			var $optimizedDiv = $modal.find(".image-optimized");
+
+			var $entry = $this.parents(".entry:first");
+
+			var $downloadLink = $entry.find(".download-link");
+
+			$originalDiv.find("img").attr("src", $downloadLink.attr("data-orig-image"));
+			$optimizedDiv.find("img").attr("src", $downloadLink.attr("href"));
+
+			$originalDiv.find(".size").html( $entry.find(".size-before").parent("div").html() );
+			$optimizedDiv.find(".size").html( $entry.find(".size-after").parent("div").html() );
+
+
+			$modal.modal();
 		});
 
 		$(".btn-file").click(function (){
-			$("#file_handle", this).click();
+			$("#file_handle").click();
 		});
 
 		$("#file_handle").click(function (e){
@@ -117,6 +124,15 @@
 
 	function initialize(){
 		$('[data-toggle="tooltip"]').tooltip();
+	}
+
+	// Function to show messages
+	function ajax_msg(status, msg) {
+		var the_msg = '<div class="alert alert-'+ (status ? 'success' : 'danger') +'">';
+		the_msg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+		the_msg += msg;
+		the_msg += '</div>';
+		$(the_msg).insertBefore(img_zone);
 	}
 
 	// rest of the codes here
@@ -245,7 +261,8 @@
 						$el.find('.size-after').html(response.output.size);
 						$el.find('.size-diff').html("-"+response.output.diff);
 						$el.find(".download-link").attr("href", response.output.url)
-							.html('<i class="fa fa-cloud-download"></i> Download');
+							.html('<i class="fa fa-cloud-download"></i> Download')
+							.attr("data-orig-image", response.input.url);
 						$el.find('.btn-retry').attr("data-url", response.output.url)
 							.html('<i class="fa fa-refresh"></i> Retry ');
 					}else{
@@ -289,7 +306,7 @@
         var $span_progress = $('<span class="progress">'+
             '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
         '</span>');
-        var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);"><a>'+
+        var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);" download><a>'+
         		'<a class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
 
         var $view_diff = $('<a href="javascript:void(0)" data-toggle="tooltip" data-original-title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');

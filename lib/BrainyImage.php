@@ -97,36 +97,6 @@ class BrainyImage {
 				return $this->returnSizeDifference($source_photo, $dest_photo, $info);
 			}
 		}
-
-
-		// $old_size = @filesize($source_photo);
-		// $new_size = @filesize($dest_photo);
-		// $size_difference = $old_size - $new_size;
-
-		// $percentage_saved = (($size_difference)/$old_size)*100;
-
-		// if( $new_size > $old_size ){
-		// 	$new_size = $old_size;
-		// 	$dest_photo = $source_photo;
-		// 	$percentage_saved = 0;
-		// }
-
-		// $results = array(
-		// 	"success" => 1,
-		// 	"input" => array(
-		// 		"size" => Helper::formatSizeUnits($old_size),
-		// 		"filename" => $this->filename,
-		// 		"type" => $info['mime']
-		// 	),
-		// 	"output" => array(
-		// 		"size" => Helper::formatSizeUnits($new_size),
-		// 		"type" => $info['mime'],
-		// 		"url" => $dest_photo,
-		// 		"diff" => round($percentage_saved, 2).'%'
-		// 	)
-		// );
-
-		// return $results;
 	}
 
 	public function returnSizeDifference($source_photo, $dest_photo, $info){
@@ -147,7 +117,8 @@ class BrainyImage {
 			"input" => array(
 				"size" => Helper::formatSizeUnits($old_size),
 				"filename" => $this->filename,
-				"type" => $info['mime']
+				"type" => $info['mime'],
+				"url" => $source_photo
 			),
 			"output" => array(
 				"size" => Helper::formatSizeUnits($new_size),

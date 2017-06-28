@@ -15,7 +15,7 @@ class CronJob{
 		foreach($dir as $key => $file) {
 			$str = "$key: ".$file;
 			// current time minus 60 seconds * 60 (minutes) * 24 (hours) * 2 (days).
-			$current_time = time() - (60 * 60 * 24 * 1);
+			$current_time = time() - (60 * 60 * 24 * 2);
 		    if (filemtime($file) < $current_time ) {
 		        if (is_dir($file)){
 		        	rmdir($file);

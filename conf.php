@@ -8,7 +8,7 @@ define('APP_AUTHOR', 'TopDogIMSolutions');
 define('APP_FOOTER', 'TopDogIMSolutions.com');
 define('APP_FOOTER_LINK', 'http://topdogimsolutions.com');
 
-
+echo '<pre>'; print_r($_SERVER); echo '</pre>';
 function env($key){
 	// live
 	$live = array(

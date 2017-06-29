@@ -12,8 +12,8 @@ use \PHPImageOptim\Tools\Png\OptiPng;
 use \PHPImageOptim\Tools\Png\PngOut;
 use \PHPImageOptim\Tools\Png\PngCrush;
 use \PHPImageOptim\Tools\Png\PngQuant;
-use \PHPImageOptim\Tools\Png\JpegTran;
-use \PHPImageOptim\Tools\Png\JpegOptim;
+use \PHPImageOptim\Tools\Jpeg\JpegTran;
+use \PHPImageOptim\Tools\Jpeg\JpegOptim;
 
 class Test{
 	function __construct()

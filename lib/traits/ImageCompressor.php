@@ -63,6 +63,8 @@ trait ImageCompressor {
 		    	'error_description' => $instance->getErrorTable()[(string) $exit_code]
 		    );
 		}
+
+		
 	}	
 
 }

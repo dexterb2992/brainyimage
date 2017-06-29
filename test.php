@@ -39,7 +39,8 @@ class Test{
 		$this->jpegOptim = new JpegOptim();
 		$this->jpegOptim->setBinaryPath(env('jpegoptim'));
 
-		
+		$this->optimizePNG();
+		$this->optimizeJPEG();
 	}
 
 	public function optimizePNG(){
@@ -50,7 +51,7 @@ class Test{
 			// ->chainCommand($pngQuant)
 		    // ->chainCommand($advPng)
 		    // ->chainCommand($optiPng)
-		    ->chainCommand($this->pngCrush)
+		    ->chainCommand($this->pngCrush);
 		    // ->chainCommand($pngOut);
 		$optim->optimise();
 	}

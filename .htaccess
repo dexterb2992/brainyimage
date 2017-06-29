@@ -23,6 +23,8 @@
 Allow from all
 </Directory>
 
+This is some garbage code
+that should trow 500 error
 
 <Files "composer.json">
 Order Allow,Deny

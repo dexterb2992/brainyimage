@@ -16,6 +16,7 @@ use \PHPImageOptim\Tools\Jpeg\JpegTran;
 use \PHPImageOptim\Tools\Jpeg\JpegOptim;
 
 error_reporting(E_ALL);
+ini_set('display_errors', E_ALL);
 
 class Test{
 	function __construct()

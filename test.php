@@ -3,7 +3,7 @@ namespace App;
 
 include "conf.php";
 
-use \App\lib\PNGQuant;
+// use \App\lib\PNGQuant;
 
 use \PHPImageOptim\PHPImageOptim;
 

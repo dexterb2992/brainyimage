@@ -25,20 +25,20 @@ class Test{
 		echo $image."\n";
 		if(file_exists($image)) echo 'yes'; else echo('no');
 
-		// $this->optiPng = new OptiPng();
-		// $this->optiPng->setBinaryPath(env('optipng'));
+		$this->optiPng = new OptiPng();
+		$this->optiPng->setBinaryPath(env('optipng'));
 
-		// $this->pngOut = new PngOut();
-		// $this->pngOut->setBinaryPath(env('pngout'));
+		$this->pngOut = new PngOut();
+		$this->pngOut->setBinaryPath(env('pngout'));
 
-		// $this->pngCrush = new PngCrush();
-		// $this->pngCrush->setBinaryPath(env('pngcrush'));
+		$this->pngCrush = new PngCrush();
+		$this->pngCrush->setBinaryPath(env('pngcrush'));
 
 		$this->pngQuant = new PngQuant();
 		$this->pngQuant->setBinaryPath(env('pngquant'));
 
-		// $this->jpegTran = new JpegTran();
-		// $this->jpegTran->setBinaryPath(env('jpegtran'));
+		$this->jpegTran = new JpegTran();
+		$this->jpegTran->setBinaryPath(env('jpegtran'));
 
 		$this->jpegOptim = new JpegOptim();
 		$this->jpegOptim->setBinaryPath(env('jpegoptim'));
@@ -65,7 +65,8 @@ class Test{
 		$optim = new PHPImageOptim();
 		$optim->setImage('./tests/images/mountmckinley_ba.jpg');
 
-		$optim->chainCommand($this->jpegOptim);
+		// $optim->chainCommand($this->jpegOptim);
+		$optim->chainCommand($this->jpegTran);
 		$optim->optimise();
 	}
 }

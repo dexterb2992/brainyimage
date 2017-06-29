@@ -11,12 +11,18 @@ define('APP_FOOTER_LINK', 'http://topdogimsolutions.com');
 function env($key){
 	// live
 	$live = array(
-		'pngquant' => '/usr/local/bin/pngquant',
-		'optipng' => '/usr/local/bin/optipng',
-		'pngcrush' => '/usr/bin/pngcrush',
-		'pngout' => '/usr/bin/pngout',
-		'jpegtran' => '/usr/bin/jpegtran',
-		'jpegoptim' => '/usr/local/bin/jpegoptim'
+		// 'pngquant' => '/usr/local/bin/pngquant',
+		// 'optipng' => '/usr/local/bin/optipng',
+		// 'pngcrush' => '/usr/bin/pngcrush',
+		// 'pngout' => '/usr/bin/pngout',
+		// 'jpegtran' => '/usr/bin/jpegtran',
+		// 'jpegoptim' => '/usr/local/bin/jpegoptim'
+		'pngquant' => 'pngquant',
+		'optipng' => 'optipng',
+		'pngcrush' => 'pngcrush',
+		'pngout' => 'pngout',
+		'jpegtran' => 'jpegtran',
+		'jpegoptim' => 'jpegoptim'
 	);
 
 	$local = array(

@@ -18,21 +18,24 @@ use \PHPImageOptim\Tools\Jpeg\JpegOptim;
 class Test{
 	function __construct()
 	{
+		$image = __DIR__.'/tests/images/lenna.png';
+		echo $image."\n";
+		if(file_exists($image)) echo 'yes'; else echo('no');
 
-		$this->optiPng = new OptiPng();
-		$this->optiPng->setBinaryPath(env('optipng'));
+		// $this->optiPng = new OptiPng();
+		// $this->optiPng->setBinaryPath(env('optipng'));
 
-		$this->pngOut = new PngOut();
-		$this->pngOut->setBinaryPath(env('pngout'));
+		// $this->pngOut = new PngOut();
+		// $this->pngOut->setBinaryPath(env('pngout'));
 
 		$this->pngCrush = new PngCrush();
 		$this->pngCrush->setBinaryPath(env('pngcrush'));
 
-		$this->pngQuant = new PngQuant();
-		$this->pngQuant->setBinaryPath(env('pngquant'));
+		// $this->pngQuant = new PngQuant();
+		// $this->pngQuant->setBinaryPath(env('pngquant'));
 
-		$this->jpegTran = new JpegTran();
-		$this->jpegTran->setBinaryPath(env('jpegtran'));
+		// $this->jpegTran = new JpegTran();
+		// $this->jpegTran->setBinaryPath(env('jpegtran'));
 
 		$this->jpegOptim = new JpegOptim();
 		$this->jpegOptim->setBinaryPath(env('jpegoptim'));
@@ -43,7 +46,7 @@ class Test{
 
 	public function optimizePNG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage('./tests/images/lenna-original.png');
+		$optim->setImage(__DIR__.'/tests/images/lenna.png');
 
 		$optim->chainCommand($this->pngCrush);
 			// ->chainCommand($pngQuant)
@@ -56,7 +59,7 @@ class Test{
 
 	public function optimizeJPEG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage('./tests/images/mountmckinley_ba.jpg');
+		$optim->setImage(__DIR__.'/tests/images/mountmckinley_ba.jpg');
 
 		$optim->chainCommand($this->jpegTran);
 		$optim->optimise();

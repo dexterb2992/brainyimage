@@ -51,8 +51,9 @@ class Test{
 		$optim = new PHPImageOptim();
 		$optim->setImage(__DIR__.'/tests/images/lenna.png');
 
-		$optim->chainCommand($this->pngCrush);
-			// ->chainCommand($pngQuant)
+		$optim
+			// ->chainCommand($this->pngCrush);
+			->chainCommand($pngQuant);
 		    // ->chainCommand($advPng)
 		    // ->chainCommand($optiPng)
 		    

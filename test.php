@@ -21,7 +21,7 @@ ini_set('display_errors', E_ALL);
 class Test{
 	function __construct()
 	{
-		$image = __DIR__.'/tests/images/lenna.png';
+		$image = './tests/images/lenna.png';
 		echo $image."\n";
 		if(file_exists($image)) echo 'yes'; else echo('no');
 
@@ -49,7 +49,7 @@ class Test{
 
 	public function optimizePNG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage(__DIR__.'/tests/images/lenna.png');
+		$optim->setImage('./tests/images/lenna.png');
 
 		$optim
 			// ->chainCommand($this->pngCrush);
@@ -63,7 +63,7 @@ class Test{
 
 	public function optimizeJPEG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage(__DIR__.'/tests/images/mountmckinley_ba.jpg');
+		$optim->setImage('./tests/images/mountmckinley_ba.jpg');
 
 		$optim->chainCommand($this->jpegTran);
 		$optim->optimise();

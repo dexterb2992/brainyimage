@@ -31,11 +31,11 @@ class Test{
 		// $this->pngOut = new PngOut();
 		// $this->pngOut->setBinaryPath(env('pngout'));
 
-		$this->pngCrush = new PngCrush();
-		$this->pngCrush->setBinaryPath(env('pngcrush'));
+		// $this->pngCrush = new PngCrush();
+		// $this->pngCrush->setBinaryPath(env('pngcrush'));
 
-		// $this->pngQuant = new PngQuant();
-		// $this->pngQuant->setBinaryPath(env('pngquant'));
+		$this->pngQuant = new PngQuant();
+		$this->pngQuant->setBinaryPath(env('pngquant'));
 
 		// $this->jpegTran = new JpegTran();
 		// $this->jpegTran->setBinaryPath(env('jpegtran'));

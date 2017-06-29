@@ -15,6 +15,8 @@ use \PHPImageOptim\Tools\Png\PngQuant;
 use \PHPImageOptim\Tools\Jpeg\JpegTran;
 use \PHPImageOptim\Tools\Jpeg\JpegOptim;
 
+error_reporting(E_ALL);
+
 class Test{
 	function __construct()
 	{

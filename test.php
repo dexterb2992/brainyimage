@@ -43,22 +43,20 @@ class Test{
 
 	public function optimizePNG(){
 		$optim = new PHPImageOptim();
-		echo __DIR__.'/tests/images/lenna-original.png';
-		$optim->setImage(__DIR__.'/tests/images/lenna-original.png');
+		$optim->setImage('./tests/images/lenna-original.png');
 
-		$optim
+		$optim->chainCommand($this->pngCrush);
 			// ->chainCommand($pngQuant)
 		    // ->chainCommand($advPng)
 		    // ->chainCommand($optiPng)
-		    ->chainCommand($this->pngCrush);
+		    
 		    // ->chainCommand($pngOut);
 		$optim->optimise();
 	}
 
 	public function optimizeJPEG(){
 		$optim = new PHPImageOptim();
-		echo __DIR__.'/tests/images/mountmckinley_ba.jpg';
-		$optim->setImage(__DIR__.'/tests/images/mountmckinley_ba.jpg');
+		$optim->setImage('./tests/images/mountmckinley_ba.jpg');
 
 		$optim->chainCommand($this->jpegTran);
 		$optim->optimise();

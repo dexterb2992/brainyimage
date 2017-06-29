@@ -65,7 +65,7 @@ class Test{
 		$optim = new PHPImageOptim();
 		$optim->setImage('./tests/images/mountmckinley_ba.jpg');
 
-		$optim->chainCommand($this->jpegTran);
+		$optim->chainCommand($this->jpegOptim);
 		$optim->optimise();
 	}
 }

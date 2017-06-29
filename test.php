@@ -43,7 +43,7 @@ class Test{
 
 	public function optimizePNG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage('tests/images/lenna-original.png');
+		$optim->setImage(__DIR__.'/tests/images/lenna-original.png');
 
 		$optim
 			// ->chainCommand($pngQuant)

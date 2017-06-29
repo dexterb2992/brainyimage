@@ -1,20 +1,22 @@
 (function (brainyImage){
 	brainyImage(window, document, window.jQuery);
 }(function brainyImage(window, document, $){
+
+
 	$(function (){
 		initialize();
 
-		var img_zone = document.getElementById('img-zone'),		
-		collect = {
-			filereader: typeof FileReader != 'undefined',
-			zone: 'draggable' in document.createElement('span'),
-			formdata: !!window.FormData
-		}, 
-		acceptedTypes = {
-			'image/png': true,
-			'image/jpeg': true,
-			'image/jpg': true
-		};
+		var img_zone = document.getElementById('img-zone'),	
+			collect = {
+				filereader: typeof FileReader != 'undefined',
+				zone: 'draggable' in document.createElement('span'),
+				formdata: !!window.FormData
+			}, 
+			acceptedTypes = {
+				'image/png': true,
+				'image/jpeg': true,
+				'image/jpg': true
+			};
 		
 		// Call AJAX upload function on drag and drop event
 		function dragHandle(element) {
@@ -132,7 +134,7 @@
 		the_msg += '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 		the_msg += msg;
 		the_msg += '</div>';
-		$(the_msg).insertBefore(img_zone);
+		$(the_msg).insertBefore($("#img-zone"));
 	}
 
 	// rest of the codes here

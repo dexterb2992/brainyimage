@@ -43,6 +43,7 @@ class Test{
 
 	public function optimizePNG(){
 		$optim = new PHPImageOptim();
+		echo __DIR__.'/tests/images/lenna-original.png';
 		$optim->setImage(__DIR__.'/tests/images/lenna-original.png');
 
 		$optim
@@ -56,7 +57,8 @@ class Test{
 
 	public function optimizeJPEG(){
 		$optim = new PHPImageOptim();
-		$optim->setImage('tests/images/mountmckinley_ba.jpg');
+		echo __DIR__.'/tests/images/mountmckinley_ba.jpg';
+		$optim->setImage(__DIR__.'/tests/images/mountmckinley_ba.jpg');
 
 		$optim->chainCommand($this->jpegTran);
 		$optim->optimise();

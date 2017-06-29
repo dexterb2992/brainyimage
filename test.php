@@ -18,8 +18,6 @@ use \PHPImageOptim\Tools\Png\JpegOptim;
 class Test{
 	function __construct()
 	{
-		$this->advPng = new AdvPng();
-		$this->advPng->setBinaryPath(env('advpng'));
 
 		$this->optiPng = new OptiPng();
 		$this->optiPng->setBinaryPath(env('optipng'));

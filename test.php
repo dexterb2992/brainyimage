@@ -53,11 +53,11 @@ class Test{
 
 		$optim
 			// ->chainCommand($this->pngCrush);
-			->chainCommand($pngQuant);
-		    // ->chainCommand($advPng)
-		    // ->chainCommand($optiPng)
+			->chainCommand($this->pngQuant);
+		    // ->chainCommand($this->advPng)
+		    // ->chainCommand($this->optiPng)
 		    
-		    // ->chainCommand($pngOut);
+		    // ->chainCommand($this->pngOut);
 		$optim->optimise();
 	}
 

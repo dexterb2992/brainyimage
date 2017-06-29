@@ -19,8 +19,7 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
 
-<Directory "tests">
-Order Allow,Deny
+<Directory "tests/images/">
 Allow from all
 </Directory>
 

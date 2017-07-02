@@ -91,7 +91,10 @@
 			$optimizedDiv.find("img").attr("src", $downloadLink.attr("href"));
 
 			$originalDiv.find(".size").html( $entry.find(".size-before").parent("div").html() );
-			$optimizedDiv.find(".size").html( $entry.find(".size-after").parent("div").html() );
+
+			var $newSizeAfter = $entry.find(".size-after").parent("div").clone();
+			$newSizeAfter.find(".view-image-diff").remove();
+			$optimizedDiv.find(".size").html( $newSizeAfter.html() );
 
 
 			$modal.modal();
@@ -311,7 +314,7 @@
             '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
         '</span>');
         var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);" download><a>'+
-        		'<a class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
+        		'<a title="Optimize again" class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
 
         var $view_diff = $('<a href="javascript:void(0)" title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');
 

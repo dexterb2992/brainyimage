@@ -39,7 +39,7 @@ class CronJob{
 		    Helper::pre($str);
 		}
 
-		echo '<br/><strong>Deleted a total of '.$this->deleted_count.' file/s.</strong><br/>';
+		echo '<br/><strong>Deleted a total of <span style="color:red;">'.$this->deleted_count.'</span> file/s.</strong><br/>';
 	}
 
 	

@@ -106,5 +106,16 @@ span.size-before {
 }
 
 .image-optimized img, .image-original img {
-    max-height: 350px;
+    width: auto;
+    height: auto;
+    max-width: 630px;
+    max-height: 130px;
+}
+
+#image_difference_modal .modal-body {
+    background: rgba(0, 0, 0, 0.14);
+}
+
+#image_difference_modal .modal-title {
+    color: rgba(0, 0, 0, 0.54);
 }

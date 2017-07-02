@@ -67,7 +67,10 @@ class BrainyImage {
 	}
 
 	public function compressUploaded($source_photo, $filename){
-		$dest_photo = 'uploads/output/'.$filename;
+		// $dest_photo = 'uploads/output/'.$filename;
+		$uniqueId = uniqid(rand(), true);
+		mkdir('uploads/output/'.$uniqueId);
+		$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;
 		 
 		$info = getimagesize($source_photo);
 
@@ -85,9 +88,9 @@ class BrainyImage {
 
 		}else if($info['mime'] == 'image/png'){
 			// $dest_photo = 'uploads/output/'.time().".png";
-			$uniqueId = uniqid(rand(), true);
+			/*$uniqueId = uniqid(rand(), true);
 			mkdir('uploads/output/'.$uniqueId);
-			$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;
+			$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;*/
 
 			$d = $this->compressPNG($source_photo, $dest_photo, 90);
 			

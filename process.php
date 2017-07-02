@@ -18,12 +18,16 @@ class AjaxProcessImage{
 					break;
 				
 				case 'compress':
+					$filename = $_POST['filename'];
+					if( $filename == '**from_url**' ){
+						$filename = basename($_POST['src']);
+					}
 
-					$this->compress($_POST['src'], $_POST['filename']);
+					$this->compress($_POST['src'], $filename);
 					break;
 
 				case 'retry':
-					$this->retry($_POST['src'], $_POST['filename']);
+					$this->retry($_POST['src'], basename($_POST['src']));
 					break;
 			}
 		}

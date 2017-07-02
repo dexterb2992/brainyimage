@@ -60,14 +60,23 @@
 		});
 
 		$(document).on("click", '.btn-retry', function (){
-			var $this = $(this);
-			var $el = $this.parents(".entry:first");
+			var $this = $(this),
+				$el = $this.parents(".entry:first"),
+				oldSize = $el.find('.size-after').text(),
+				files = [{
+					'name': $this.attr("data-url"),
+					'oldSize': oldSize
+				}],
+				$entry = generateHTMLEntries(files, 0);
 
-			var files = [{'name': $this.attr("data-url")}]
-			
-			var entry = generateHTMLEntries(files, 0);
+			$el.append($entry);
 
-			$el.append(entry);
+			var data = {
+				url: $this.attr("data-url"),
+				filename: '**from_url**'
+			};
+
+			compressImage(data, $entry);
 
 			initialize();
 		});
@@ -94,10 +103,6 @@
 
 		$(".btn-file").click(function (){
 			$("#file_handle").click();
-		});
-
-		$("#file_handle").click(function (e){
-			e.stopImmediatePropagation();
 		});
 		
 		// File upload progress event listener
@@ -302,7 +307,14 @@
        		+'</div>');
        	var $file_after = $('<div class="col-md-3 file-after"></div>');
 
-       	var $span_size_before = $('<span class="size-before badge badge-info">'+formatSizeUnits(files[i]['size'])+'</span>');
+       	var sizeBefore = formatSizeUnits(files[i]['size']);
+
+       	if( files[i].hasOwnProperty('oldSize') ){
+       		sizeBefore = files[i]['oldSize'];
+       	}
+
+
+       	var $span_size_before = $('<span class="size-before badge badge-info">'+sizeBefore+'</span>');
         var $span_size_after = $('<span class="size-after badge badge-primary"></span>');
         var $span_size_diff = $('<span class="size-diff badge badge-danger"></span>');
         var $span_progress = $('<span class="progress">'+

@@ -4,7 +4,7 @@ namespace App\lib\traits;
 use App\lib\PNGQuant;
 use App\lib\Helper;
 
-// include( dirname(dirname(__DIR__))."/conf.php" );
+use App\lib\JpegCompressor;
 
 trait ImageCompressor {
 
@@ -12,11 +12,20 @@ trait ImageCompressor {
 		$info = getimagesize($source_path);
 
 		if ($info['mime'] == 'image/jpeg'){
-			$image = imagecreatefromjpeg($source_path);
+			/*$image = imagecreatefromjpeg($source_path);
 
 			imagejpeg($image, $destination_url, $quality);
 
-			return $destination_url;
+			return $destination_url;*/
+
+			$command = "jpegtran -copy none -progressive -optimize ".escapeshellarg($source_path)." > ".escapeshellarg($destination_url);
+			$output = null;
+			
+			$response = system($command, $output);
+
+			if( file_exists($destination_url) )
+				return $destination_url;
+			
 		}
 
 		return false;

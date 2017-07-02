@@ -9,11 +9,14 @@ class CronJob{
 	function __construct()
 	{
 		$this->dir = __DIR__.'/uploads/';
+		$this->deleted_count = 0;
 
 		// delete from output folder
 		$this->deleteOldFiles( glob($this->dir."output/*") );
 		// delete from source folder
 		$this->deleteOldFiles( glob($this->dir."source/*") );
+
+
 	}
 
 	private function deleteOldFiles($dir){
@@ -28,12 +31,15 @@ class CronJob{
 		        	unlink($file);
 		        }
 		        $str.= "(success: filetime: ".filemtime($file).", current_time: $current_time)";
+		        $this->deleted_count++;
 		    }else{
 		    	$str.= "(failed: filetime: ".filemtime($file).", current_time: $current_time)";
 		    }
 
 		    Helper::pre($str);
 		}
+
+		echo '<br/><strong>Deleted a total of '.$this->deleted_count.' file/s.</strong><br/>';
 	}
 
 	

@@ -4,3 +4,4 @@
 *.log
 test.php
 /tests/images/*
+error_log

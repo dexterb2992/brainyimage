@@ -4,8 +4,6 @@
 
 
 	$(function (){
-		initialize();
-
 		var img_zone = document.getElementById('img-zone'),	
 			collect = {
 				filereader: typeof FileReader != 'undefined',
@@ -77,8 +75,6 @@
 			};
 
 			compressImage(data, $entry);
-
-			initialize();
 		});
 
 		$(document).on("click", ".view-image-diff", function (){
@@ -128,10 +124,6 @@
 			};
 		})(jQuery, window);	
 	});
-
-	function initialize(){
-		$('[data-toggle="tooltip"]').tooltip();
-	}
 
 	// Function to show messages
 	function ajax_msg(status, msg) {
@@ -282,8 +274,6 @@
 							ajax_msg(false, 'An error has occured while compressing your image.');
 						}
 					}
-
-					initialize();
 					
 				},
 				error: function (){
@@ -323,9 +313,9 @@
         var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);" download><a>'+
         		'<a class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
 
-        var $view_diff = $('<a href="javascript:void(0)" data-toggle="tooltip" data-original-title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');
+        var $view_diff = $('<a href="javascript:void(0)" title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');
 
-        $file_before.append( $('<span>'+files[i]['name']+'</span>') );
+        $file_before.append( $('<span title="'+files[i]['name']+'">'+files[i]['name']+'</span>') );
 
        	$file_progress.children('div:first').append( $span_size_before );
        	$file_progress.children('div:nth-child(2)').append($span_progress);

@@ -70,7 +70,7 @@ class Test{
 	}
 }
 
-var_dump(sys_get_temp_dir());
+var_dump(shell_exec("jpegtran"));
 
 new Test();
 

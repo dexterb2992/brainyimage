@@ -19,10 +19,7 @@ class BrainyImage {
 	}
 
 	public function upload($file){
-		// var_dump($file);
 		foreach($file['img_file']['tmp_name'] as $key => $tmp_name ){
-			// $filename = str_replace(' ', '-', $file['img_file']['name'][$key]);
-			// clean the filename
 			$filename = preg_replace( '/[^a-z0-9.]+/', '_', strtolower( $file['img_file']['name'][$key] ) );
 
 			$file_size =$file['img_file']['size'][$key];
@@ -67,7 +64,6 @@ class BrainyImage {
 	}
 
 	public function compressUploaded($source_photo, $filename){
-		// $dest_photo = 'uploads/output/'.$filename;
 		$uniqueId = uniqid(rand(), true);
 		mkdir('uploads/output/'.$uniqueId);
 		$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;
@@ -87,10 +83,6 @@ class BrainyImage {
 			}
 
 		}else if($info['mime'] == 'image/png'){
-			// $dest_photo = 'uploads/output/'.time().".png";
-			/*$uniqueId = uniqid(rand(), true);
-			mkdir('uploads/output/'.$uniqueId);
-			$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;*/
 
 			$d = $this->compressPNG($source_photo, $dest_photo, 90);
 			

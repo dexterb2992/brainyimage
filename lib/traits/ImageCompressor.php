@@ -4,28 +4,16 @@ namespace App\lib\traits;
 use App\lib\PNGQuant;
 use App\lib\Helper;
 
-use App\lib\JpegCompressor;
+use App\lib\traits\JpegCompressor;
 
 trait ImageCompressor {
+	use JpegCompressor;
 
 	public function compressJPEG($source_path, $destination_url, $quality){
 		$info = getimagesize($source_path);
 
 		if ($info['mime'] == 'image/jpeg'){
-			/*$image = imagecreatefromjpeg($source_path);
-
-			imagejpeg($image, $destination_url, $quality);
-
-			return $destination_url;*/
-
-			$command = "jpegtran -copy none -progressive -optimize ".escapeshellarg($source_path)." > ".escapeshellarg($destination_url);
-			$output = null;
-			
-			$response = system($command, $output);
-
-			if( file_exists($destination_url) )
-				return $destination_url;
-			
+			return $this->optimizeJpeg($source_path, $destination_url);
 		}
 
 		return false;

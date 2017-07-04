@@ -70,7 +70,6 @@ class Test{
 	}
 }
 
-var_dump(exec("jpegtran"));
 
 new Test();
 

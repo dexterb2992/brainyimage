@@ -15,7 +15,7 @@ trait JpegCompressor{
 	}
 
 	public function jpegOptim($source_path, $destination_dir){
-		$command = "jpegoptim --strip-all ".$source_path." -d ".$destination_dir;
+		$command = "jpegoptim --strip-all ".escapeshellarg($source_path)." -d ".escapeshellarg($destination_dir);
 
 		$output = null;
 		

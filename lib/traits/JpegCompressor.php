@@ -4,19 +4,20 @@ namespace App\lib\traits;
 trait JpegCompressor{
 
 	public function optimizeJpeg($source_path, $destination_url){
-		$source_path = escapeshellarg($source_path);
-		$destination_url = escapeshellarg($destination_url);
+		// $source_path = escapeshellarg($source_path);
+		// $destination_url = escapeshellarg($destination_url);
 
 		$jpegTran = $this->jpegTran($source_path, $destination_url);
 		$jpegOptim = $this->jpegOptim($source_path, $destination_url);
 
 		$dir = "./";
 
-		$size1 = $jpegTran != false ?  $size1 = filesize($dir.$jpegTran) : 0;
-		$size2 = $jpegOptim != false ? $size2 = filesize($dir.$jpegOptim) : 0;
+		$size1 = $jpegTran != false ?  filesize($dir.$jpegTran) : 0;
+		$size2 = $jpegOptim != false ? filesize($dir.$jpegOptim) : 0;
 		sleep(2);
 		// save to logs
-		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n");
+		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n
+				 jpegTran: $jpegTran,\n jpegOptim: $jpegOptim");
 
 		if( $size1 > $size2 )
 			return $jpegOptim;
@@ -27,7 +28,7 @@ trait JpegCompressor{
 	}
 
 	private function jpegTran($source_path, $destination_url){
-		$command = "jpegtran -copy none -progressive -optimize $source_path > $destination_url";
+		$command = "jpegtran -copy none -progressive -optimize ".escapeshellarg($source_path)." > ".escapeshellarg($destination_url);
 		$output = null;
 		
 		$response = system($command, $output);
@@ -38,7 +39,7 @@ trait JpegCompressor{
 	}
 
 	private function jpegOptim($source_path, $destination_url){
-		$command = "jpegoptim --strip-all --all-progressive $source_path --dest=$destination_url";
+		$command = "jpegoptim --strip-all --all-progressive ".escapeshellarg($source_path)." --dest=".escapeshellarg($destination_url);
 
 		$output = null;
 		

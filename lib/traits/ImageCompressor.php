@@ -17,7 +17,7 @@ trait ImageCompressor {
 		mkdir( $destination_dir."jpegtran");
 		mkdir( $destination_dir."jpegoptim");
 		$jpegtran_dest = $destination_dir."jpegtran/".basename($source_path);
-		$jpegoptim_dest = $destination_dir."jpegoptim/".basename($source_path);
+		$jpegoptim_dest = $destination_dir."jpegoptim/";
 
 		$jpegTran = $this->jpegTran($source_path, $jpegtran_dest);
 		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dest);

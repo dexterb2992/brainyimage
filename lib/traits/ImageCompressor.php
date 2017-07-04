@@ -28,7 +28,9 @@ trait ImageCompressor {
 		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n
 				 jpegTran: $jpegTran,\n jpegOptim: $jpegOptim");
 
-		if( $size1 > $size2 )
+		if( $jpegOptim == false && $jpegTran == false ) return false;
+
+		if( $size1 > $size2 && $size2 != 0 )
 			return $jpegOptim;
 		else
 			return $jpegTran;

@@ -15,7 +15,7 @@ trait JpegCompressor{
 	}
 
 	public function jpegOptim($source_path, $destination_url){
-		$command = "jpegoptim --strip-all --all-progressive ".escapeshellarg($source_path)." --dest=".escapeshellarg($destination_url);
+		$command = "jpegoptim --strip-all --all-progressive ".escapeshellarg($source_path)." -d ".escapeshellarg($destination_url);
 
 		$output = null;
 		

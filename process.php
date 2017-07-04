@@ -46,7 +46,7 @@ class AjaxProcessImage{
 	private function compress($src, $filename = ""){
 		$res = $this->brainyImage->compressUploaded($src, $filename);
 
-		echo json_encode($res);
+		echo is_array($res) ? json_encode($res) : $res;
 	}
 
 	private function retry($src, $filename = ""){

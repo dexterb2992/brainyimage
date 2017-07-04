@@ -28,8 +28,9 @@ trait ImageCompressor {
 		$size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
 		
 		// save to logs
-		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n
-				 jpegTran: $jpegTran,\n jpegOptim: $jpegOptim");
+		$cmd = "jpegoptim --strip-all --all-progressive ".escapeshellarg($source_path)." -d ".escapeshellarg($jpegoptim_dest);
+		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2".PHP_EOL."
+				 jpegTran: $jpegTran,".PHP_EOL." jpegOptim: $jpegOptim".PHP_EOL."cmd: $cmd");
 
 		if( $jpegOptim == false && $jpegTran == false ) return false;
 

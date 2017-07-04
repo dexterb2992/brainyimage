@@ -4,7 +4,7 @@ namespace App\lib\traits;
 trait JpegCompressor{
 
 	public function jpegTran($source_path, $destination_url){
-		$command = "jpegtran -copy none -progressive -optimize ".escapeshellarg($source_path)." > ".escapeshellarg($destination_url);
+		$command = "jpegtran -copy none -optimize ".escapeshellarg($source_path)." > ".escapeshellarg($destination_url);
 		$output = null;
 		
 		$response = system($command, $output);
@@ -15,7 +15,7 @@ trait JpegCompressor{
 	}
 
 	public function jpegOptim($source_path, $destination_url){
-		$command = "jpegoptim --strip-all --all-progressive ".escapeshellarg($source_path)." -d ".escapeshellarg($destination_url);
+		$command = "jpegoptim --strip-all ".escapeshellarg($source_path)." -d ".escapeshellarg($destination_url);
 
 		$output = null;
 		

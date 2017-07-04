@@ -9,12 +9,29 @@ use App\lib\traits\JpegCompressor;
 trait ImageCompressor {
 	use JpegCompressor;
 
-	public function compressJPEG($source_path, $destination_url, $quality){
+	public function compressJPEG($source_path, $destination_dir){
 		$info = getimagesize($source_path);
 
-		if ($info['mime'] == 'image/jpeg'){
-			return $this->optimizeJpeg($source_path, $destination_url);
-		}
+		// $source_path = escapeshellarg($source_path);
+		// $destination_url = escapeshellarg($destination_url);
+		$jpegtran_dest = $destination_dir."jtran_".basename($source_path);
+		$jpegoptim_dest = $destination_dir."jopt_".basename($source_path);
+
+		$jpegTran = $this->jpegTran($source_path, $jpegtran_dest);
+		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dest);
+
+
+		$size1 = $jpegTran != false ?  filesize($jpegTran) : 0;
+		$size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
+		sleep(2);
+		// save to logs
+		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n
+				 jpegTran: $jpegTran,\n jpegOptim: $jpegOptim");
+
+		if( $size1 > $size2 )
+			return $jpegOptim;
+		else
+			return $jpegTran;
 
 		return false;
 	}

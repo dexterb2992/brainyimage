@@ -66,15 +66,15 @@ class BrainyImage {
 	public function compressUploaded($source_photo, $filename){
 		$uniqueId = uniqid(rand(), true);
 		mkdir('uploads/output/'.$uniqueId);
-		$dest_photo = 'uploads/output/'.$uniqueId.'/'.$filename;
+		$dest_dir = 'uploads/output/'.$uniqueId.'/';
 		 
 		$info = getimagesize($source_photo);
 
 		if ($info['mime'] == 'image/jpeg'){
-			$d = $this->compressJPEG($source_photo, $dest_photo, 85);
+			$output_file = $this->compressJPEG($source_photo, $dest_dir);
 
-			if( $d != false ){
-				return $this->returnSizeDifference($source_photo, $dest_photo, $info);
+			if( $output_file != false ){
+				return $this->returnSizeDifference($source_photo, $output_file, $info);
 			}else{
 				return json_encode(array(
 					"error" => "Something went wrong while trying to compress a JPEG file.", 
@@ -84,12 +84,12 @@ class BrainyImage {
 
 		}else if($info['mime'] == 'image/png'){
 
-			$d = $this->compressPNG($source_photo, $dest_photo, 90);
+			$d = $this->compressPNG($source_photo, $dest_dir.$filename, 90);
 			
 			if( is_array($d) ){
 				return $d;
 			}else{
-				return $this->returnSizeDifference($source_photo, $dest_photo, $info);
+				return $this->returnSizeDifference($source_photo, $dest_dir.$filename, $info);
 			}
 		}
 	}

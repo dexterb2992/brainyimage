@@ -4,7 +4,8 @@ namespace App\lib\traits;
 trait JpegCompressor{
 
 	public function optimizeJpeg($source_path, $destination_url){
-		$jpetran = $this->jpegTran($source_path, $destination_url);
+		$jpegtran = $this->jpegTran($source_path, $destination_url);
+		return $jpegtran;
 	}
 
 	private function jpegTran($source_path, $destination_url){
@@ -19,6 +20,6 @@ trait JpegCompressor{
 	}
 
 	private function jpegOptim($source_path, $destination_url){
-		
+
 	}
 }

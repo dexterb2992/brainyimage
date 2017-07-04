@@ -13,6 +13,9 @@ trait JpegCompressor{
 		$size1 = $jpegTran != false ?  $size1 = @filesize($jpegTran) : 0;
 		$size2 = $jpegOptim != false ? $size2 = @filesize($jpegOptim) : 0;
 
+		// save to logs
+		@file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n");
+
 		if( $size1 > $size2 )
 			return $jpegOptim;
 		else

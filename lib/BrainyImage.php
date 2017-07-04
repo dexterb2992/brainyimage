@@ -65,8 +65,8 @@ class BrainyImage {
 
 	public function compressUploaded($source_photo, $filename){
 		$uniqueId = uniqid(rand(), true);
-		mkdir('uploads/output/'.$uniqueId);
-		$dest_dir = 'uploads/output/'.$uniqueId.'/';
+		mkdir('./uploads/output/'.$uniqueId);
+		$dest_dir = './uploads/output/'.$uniqueId.'/';
 		 
 		$info = getimagesize($source_photo);
 

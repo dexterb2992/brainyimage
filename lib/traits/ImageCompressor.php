@@ -14,16 +14,19 @@ trait ImageCompressor {
 
 		// $source_path = escapeshellarg($source_path);
 		// $destination_url = escapeshellarg($destination_url);
-		$jpegtran_dest = $destination_dir."jtran_".basename($source_path);
-		$jpegoptim_dest = $destination_dir."jopt_".basename($source_path);
+		mkdir( $destination_dir."jpegtran");
+		mkdir( $destination_dir."jpegoptim");
+		$jpegtran_dest = $destination_dir."jpegtran/".basename($source_path);
+		$jpegoptim_dest = $destination_dir."jpegoptim/".basename($source_path);
 
 		$jpegTran = $this->jpegTran($source_path, $jpegtran_dest);
 		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dest);
 
+		sleep(3);
 
 		$size1 = $jpegTran != false ?  filesize($jpegTran) : 0;
 		$size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
-		sleep(2);
+		
 		// save to logs
 		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2\n
 				 jpegTran: $jpegTran,\n jpegOptim: $jpegOptim");
@@ -44,8 +47,6 @@ trait ImageCompressor {
 		$instance = new PNGQuant();
 
 		// Change the path to the binary of pngquant, for example in windows would be (with an example path):
-		// $instance->setBinaryPath("E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe")
-		// $instance->setBinaryPath("/usr/local/bin/pngquant")
 		$instance->setBinaryPath(env("pngquant"))
 			->execute();
 
@@ -84,10 +85,3 @@ trait ImageCompressor {
 	}	
 
 }
-
-
-// /usr/bin/jpegtran
-// /usr/local/bin/jpegoptim
-// /usr/local/bin/optipng
-// /usr/bin/pngcrush
-// /usr/bin/pngout

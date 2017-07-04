@@ -17,10 +17,10 @@ trait ImageCompressor {
 		mkdir( $destination_dir."jpegtran");
 		mkdir( $destination_dir."jpegoptim");
 		$jpegtran_dest = $destination_dir."jpegtran/".basename($source_path);
-		$jpegoptim_dest = $destination_dir."jpegoptim/";
+		$jpegoptim_dir = $destination_dir."jpegoptim/";
 
 		$jpegTran = $this->jpegTran($source_path, $jpegtran_dest);
-		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dest);
+		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dir);
 
 		sleep(3);
 
@@ -28,9 +28,8 @@ trait ImageCompressor {
 		$size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
 		
 		// save to logs
-		$cmd = "jpegoptim --strip-all ".escapeshellarg($source_path)." -d ".escapeshellarg($jpegoptim_dest);
-		file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2".PHP_EOL."
-				 jpegTran: $jpegTran,".PHP_EOL." jpegOptim: $jpegOptim".PHP_EOL."cmd: $cmd");
+		@file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2".PHP_EOL."
+				 jpegTran: $jpegTran,".PHP_EOL." jpegOptim: $jpegOptim".PHP_EOL);
 
 		if( $jpegOptim == false && $jpegTran == false ) return false;
 

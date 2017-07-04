@@ -20,8 +20,9 @@ trait JpegCompressor{
 		$output = null;
 		
 		$response = system($command, $output);
-
-		if( file_exists($destination_dir.basename($source_path)) )
+		$destination_url = $destination_dir.basename($source_path);
+		
+		if( file_exists($destination_url) )
 			return $destination_url;
 		return false;
 	}

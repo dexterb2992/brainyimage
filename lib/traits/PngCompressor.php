@@ -47,6 +47,9 @@ trait PngCompressor{
 	public function pngCrush($source_path, $destination_path){
 		$command = "pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ".escapeshellarg($source_path, escapeshellarg($destination_path));
 
-		
+		system($command);
+		if( file_exists($destination_path) )
+			return $destination_path;
+		return false;
 	}
 }

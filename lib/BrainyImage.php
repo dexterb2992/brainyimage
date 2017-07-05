@@ -84,12 +84,12 @@ class BrainyImage {
 
 		}else if($info['mime'] == 'image/png'){
 
-			$d = $this->compressPNG($source_photo, $dest_dir.$filename);
+			$dest_path = $this->compressPNG($source_photo, $dest_dir);
 			
-			if( is_array($d) ){
-				return $d;
+			if( is_array($dest_path) ){
+				return $dest_path;
 			}else{
-				return $this->returnSizeDifference($source_photo, $dest_dir.$filename, $info);
+				return $this->returnSizeDifference($source_photo, $dest_path, $info);
 			}
 		}
 	}

@@ -5,7 +5,7 @@ use App\lib\PNGQuant;
 
 trait PngCompressor{
 
-	public function pngQuant($source_path, $destination_path){
+	public function pngQuant($source_path, $destination_path, $quality = 90){
 		$instance = new PNGQuant($source_path, $destination_path);
 
 		// Change the path to the binary of pngquant, for example in windows would be (with an example path):
@@ -47,7 +47,8 @@ trait PngCompressor{
 	}
 
 	public function pngCrush($source_path, $destination_path){
-		$command = "pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ".escapeshellarg($source_path)." ".escapeshellarg($destination_path);
+		$command = "pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow "
+					.escapeshellarg($source_path)." ".escapeshellarg($destination_path);
 
 		system($command);
 		

@@ -21,11 +21,6 @@ class Helper{
 	    return $bytes;
 	}
 
-	public static function getPNGQuantPath(){
-		$path = __DIR__."\pngquant\pngquant.exe";
-		return	 $escaped = preg_replace('/\\\\/','\\\\\\\\',$path);
-	}
-
 	// When the directory is not empty:
 	public static function rrmdir($dir) {
 		if (is_dir($dir)) {
@@ -45,4 +40,32 @@ class Helper{
 		echo '<pre>'; print_r($str); echo '</pre>';
 	}
 
+	public static function log($str){
+
+	}
+
+	/** 
+	 * Identifies which file is the smallest
+	 * @param array $paths
+	 * @return string <path> of smallest in size
+	 */
+	public static function identifyLesserSize($paths){
+		$result = false;
+		$lowest = 0;
+
+		foreach ($paths as $key => $path) {
+			$size = filesize($path);
+
+			if( $key == 0 ) $lowest = $size;
+
+			if( $lowest < $size ){
+				continue;
+			}else{
+				$lowest = $size;
+				$result = $path;
+			}
+		}
+		
+		return $result;
+	}
 }

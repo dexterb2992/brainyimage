@@ -1,7 +1,6 @@
 <?php
 namespace App\lib\traits;
 
-use App\lib\PNGQuant;
 use App\lib\Helper;
 
 use App\lib\traits\JpegCompressor;
@@ -22,66 +21,57 @@ trait ImageCompressor {
 		$jpegTran = $this->jpegTran($source_path, $jpegtran_dest);
 		$jpegOptim = $this->jpegOptim($source_path, $jpegoptim_dir);
 
-		sleep(3);
+		sleep(2);
 
-		$size1 = $jpegTran != false ?  filesize($jpegTran) : 0;
-		$size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
+		// $size1 = $jpegTran != false ?  filesize($jpegTran) : 0;
+		// $size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
 		
-		// save to logs
-		@file_put_contents("./logs/Jpeg.log", "jpegTran: $size1, jpegOptim: $size2".PHP_EOL."
-				 jpegTran: $jpegTran,".PHP_EOL." jpegOptim: $jpegOptim".PHP_EOL);
 
-		if( $jpegOptim == false && $jpegTran == false ) return false;
+		// if( $jpegOptim == false && $jpegTran == false ) return false;
 
-		if( $size1 > $size2 && $size2 != 0 )
-			return $jpegOptim;
-		else
-			return $jpegTran;
+		// if( $size1 > $size2 && $size2 != 0 )
+		// 	return $jpegOptim;
+		// else
+		// 	return $jpegTran;
+
+		// return false;
+		$flag1 = $jpegTran != false && file_exists($jpegTran) ? true: false;
+		$flag2 = $jpegOptim != false && file_exists($jpegOptim) ? true: false;
+
+		if( $flag1 && $flag2 )
+			return Helper::identifyLesserSize( array($jpegTran, $jpegOptim) );
+		
+		if( !$flag2 && $flag1 ) return $jpegTran;
+		if( !$flag1 && $flag2 ) return $jpegOptim;
 
 		return false;
 	}
 
-	public function compressPNG($source_path, $destination_path, $quality){
+	public function compressPNG($source_path, $destination_dir, $quality){
 		
+		$filename = basename($source_path);
+		mkdir($destination_dir.'pngquant/');
+		mkdir($destination_dir.'pngcrush/');
 
-		$instance = new PNGQuant();
+		$pngquant_dest = $destination_dir.'pngquant/'.$filename;
+		$pngcrush_dest = $destination_dir.'pngcrush/'.$filename;
 
-		// Change the path to the binary of pngquant, for example in windows would be (with an example path):
-		$instance->setBinaryPath(env("pngquant"))
-			->execute();
+		$this->pngQuant($source_path, $pngquant_dest);
 
-		// Set the path to the image to compress
-		$result = $instance->setImage($source_path)
-		    // Overwrite output file if exists, otherwise pngquant will generate output ...
-		    ->overwriteExistingFile()
-		    // As the quality in pngquant isn't fixed (it uses a range)
-		    // set the quality between 50 and 80
-		    ->setQuality(60, $quality)
-		    // Retrieve RAW data from pngquant
-		    ->getRawOutput();
+		$this->pngCrush($source_path, $pngcrush_dest);
+		sleep(2);
 
-		$exit_code = $result["statusCode"];
+		$flag1 = file_exists($pngquant_dest) ? true: false;
+		$flag2 = file_exists($pngcrush_dest) ? true: false;
 
-
-		// if exit code is equal to 0 then everything went right !
-		if($exit_code == 0){
-
-		    $rawImage = imagecreatefromstring($result["imageData"]);
-
-		    // Example Save the PNG Image from the raw data into a file or do whatever you want.
-		    imagepng($rawImage , $destination_path);
-
-		}else{
-		    return array(
-		    	"success" => 0, 
-		    	"source_path" => $source_path,
-		    	"file_info" => parse_url($source_path), 
-		    	"error" => "Something went wrong (status code $exit_code)  with description: ". $instance->getErrorTable()[(string) $exit_code],
-		    	'error_description' => $instance->getErrorTable()[(string) $exit_code]
-		    );
+		if( $flag1 && $flag2 ){
+			return Helper::identifyLesserSize( array($pngquant_dest, $pngcrush_dest) );
 		}
 
-		
+		if( !$flag2 && $flag1 ) return $pngquant_dest;
+		if( !$flag1 && $flag2 ) return $pngcrush_dest;
+
+		return false;
 	}	
 
 }

@@ -4,6 +4,7 @@ namespace App;
 include "conf.php";
 
 // use \App\lib\PNGQuant;
+use App\lib\Helper;
 
 use \PHPImageOptim\PHPImageOptim;
 
@@ -71,5 +72,19 @@ class Test{
 }
 
 
-new Test();
+// new Test();
+
+class Test2{
+	function __construct()
+	{
+		$this->test();
+	}
+
+	function test(){
+		$paths = glob("E:\wamp64\www\brainyimage\uploads\source\*");
+		Helper::pre(Helper::identifyLesserSize($paths));
+	}
+}
+
+new Test2();
 

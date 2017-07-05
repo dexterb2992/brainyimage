@@ -4,9 +4,11 @@ namespace App\lib\traits;
 use App\lib\Helper;
 
 use App\lib\traits\JpegCompressor;
+use App\lib\traits\PngCompressor;
 
 trait ImageCompressor {
 	use JpegCompressor;
+	use PngCompressor;
 
 	public function compressJPEG($source_path, $destination_dir){
 		$info = getimagesize($source_path);

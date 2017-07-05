@@ -33,6 +33,8 @@ trait PngCompressor{
 		    // Example Save the PNG Image from the raw data into a file or do whatever you want.
 		    imagepng($rawImage , $destination_path);
 
+		    return $destination_path;
+
 		}else{
 		    return array(
 		    	"success" => 0, 
@@ -48,8 +50,7 @@ trait PngCompressor{
 		$command = "pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ".escapeshellarg($source_path, escapeshellarg($destination_path));
 
 		system($command);
-		if( file_exists($destination_path) )
-			return $destination_path;
-		return false;
+		
+		return $destination_path;
 	}
 }

@@ -84,7 +84,7 @@ class BrainyImage {
 
 		}else if($info['mime'] == 'image/png'){
 
-			$d = $this->compressPNG($source_photo, $dest_dir.$filename, 90);
+			$d = $this->compressPNG($source_photo, $dest_dir.$filename);
 			
 			if( is_array($d) ){
 				return $d;

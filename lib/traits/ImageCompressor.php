@@ -47,7 +47,7 @@ trait ImageCompressor {
 		return false;
 	}
 
-	public function compressPNG($source_path, $destination_dir, $quality){
+	public function compressPNG($source_path, $destination_dir){
 		
 		$filename = basename($source_path);
 		mkdir($destination_dir.'pngquant/');

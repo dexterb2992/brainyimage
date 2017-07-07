@@ -1,6 +1,5 @@
 <?php 
 namespace App;  
-
 require_once "conf.php";
 
 use App\lib\Helper;
@@ -15,8 +14,6 @@ class CronJob{
 		$this->deleteOldFiles( glob($this->dir."output/*") );
 		// delete from source folder
 		$this->deleteOldFiles( glob($this->dir."source/*") );
-
-
 	}
 
 	private function deleteOldFiles($dir){
@@ -41,8 +38,6 @@ class CronJob{
 
 		echo '<br/><strong>Deleted a total of <span style="color:red;">'.$this->deleted_count.'</span> file/s.</strong><br/>';
 	}
-
-	
 }
 
 new CronJob();

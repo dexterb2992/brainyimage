@@ -1,8 +1,6 @@
 (function (brainyImage){
 	brainyImage(window, document, window.jQuery);
 }(function brainyImage(window, document, $){
-
-
 	$(function (){
 		var img_zone = document.getElementById('img-zone'),	
 			collect = {
@@ -23,8 +21,6 @@
 			element.ondrop = function (e) { 
 				e.preventDefault();
 				$("#results").removeClass("hidden");
-				// ajax_upload(e.dataTransfer.files);
-				// $('.btn-file :file').trigger("change");
 				var files = e.dataTransfer.files;
 				for (var i = files.length - 1; i >= 0; i--) {
 				
@@ -229,7 +225,6 @@
 				}
 			});	
 		})();
-
 	}
 
 	function compressImage(data, $el){
@@ -249,8 +244,7 @@
 					if(evt.lengthComputable) {
 						var pct = (evt.loaded / evt.total) * 100;
 						progressbar.css({"width": pct+"%"}).html('Compressing');							
-					}
-					else {
+					}else {
 						console.warn('2. Content Length not reported!');
 					}
 				},
@@ -263,9 +257,11 @@
 						$el.find('.size-after').html(response.output.size);
 						$el.find('.size-diff').html("-"+response.output.diff);
 						$el.find(".download-link").attr("href", response.output.url)
+							.removeClass("disabled")
 							.html('<i class="fa fa-cloud-download"></i> Download')
 							.attr("data-orig-image", response.input.url);
 						$el.find('.btn-retry').attr("data-url", response.output.url)
+							.removeClass("disabled")
 							.html('<i class="fa fa-refresh"></i> Retry ');
 					}else{
 						if( response.hasOwnProperty('error') && response.hasOwnProperty('error_description') ){
@@ -313,8 +309,8 @@
         var $span_progress = $('<span class="progress">'+
             '<span id="progress_'+files[i]['name']+'" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="0%" style="width: 0%;height: 19px;" aria-valuemin="0" aria-valuemax="100"></span>'+
         '</span>');
-        var $download_link = $('<a class="download-link btn btn-sm btn-warning" href="javascript:void(0);" download><a>'+
-        		'<a title="Optimize again" class="btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
+        var $download_link = $('<a class="disabled download-link btn btn-sm btn-warning" href="javascript:void(0);" download><a>'+
+        		'<a title="Optimize again" class="disabled btn-retry btn btn-sm btn-success" href="javascript:void(0);"></a>');
 
         var $view_diff = $('<a href="javascript:void(0)" title="View image difference" class="label text-white view-image-diff pull-right"><i class="fa fa-eye"></i></a>');
 
@@ -325,7 +321,6 @@
        	$file_progress.children('div:last').append($span_size_after);
        	$file_progress.children('div:last').append($view_diff);
 
-       	// $file_after.append($view_diff);
        	$file_after.append($download_link);
        	$file_after.append($span_size_diff);
 

@@ -1,6 +1,6 @@
 /vendor
-/uploads/source
-/uploads/output
+/uploads/source/*
+/uploads/output/*
 *.log
 test.php
 /tests/images/*

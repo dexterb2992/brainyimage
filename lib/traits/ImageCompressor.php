@@ -12,9 +12,7 @@ trait ImageCompressor {
 
 	public function compressJPEG($source_path, $destination_dir){
 		$info = getimagesize($source_path);
-
-		// $source_path = escapeshellarg($source_path);
-		// $destination_url = escapeshellarg($destination_url);
+		
 		mkdir( $destination_dir."jpegtran");
 		mkdir( $destination_dir."jpegoptim");
 		$jpegtran_dest = $destination_dir."jpegtran/".basename($source_path);
@@ -25,18 +23,6 @@ trait ImageCompressor {
 
 		sleep(2);
 
-		// $size1 = $jpegTran != false ?  filesize($jpegTran) : 0;
-		// $size2 = $jpegOptim != false ? filesize($jpegOptim) : 0;
-		
-
-		// if( $jpegOptim == false && $jpegTran == false ) return false;
-
-		// if( $size1 > $size2 && $size2 != 0 )
-		// 	return $jpegOptim;
-		// else
-		// 	return $jpegTran;
-
-		// return false;
 		$flag1 = $jpegTran != false && file_exists($jpegTran) ? true: false;
 		$flag2 = $jpegOptim != false && file_exists($jpegOptim) ? true: false;
 

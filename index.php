@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="thumbnail image-original">
-                                <img src="..." alt="...">
+                                <img src="assets/images/600x400.png" alt="Original image">
                                 <div class="caption"><br/>
                                     <h4>Original</h4>
                                     <p class="size">...</p>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="thumbnail image-optimized">
-                                <img src="..." alt="...">
+                                <img src="assets/images/600x400.png" alt="Optimized image">
                                 <div class="caption"><br/>
                                     <h4>Optimized</h4>
                                     <p class="size">...</p>

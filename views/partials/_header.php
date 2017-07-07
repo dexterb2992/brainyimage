@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/vendor/font-awesome-4.7.0/css/font-awesome.min.css" />
     <!-- Custom styles for this template -->
     <link href="assets/css/sticky-footer-navbar.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/style.min.css" rel="stylesheet" />
   </head>
 
   <body class="bg-bluesh">

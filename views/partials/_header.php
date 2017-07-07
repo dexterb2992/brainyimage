@@ -11,9 +11,9 @@
     <title><?= APP_NAME.' - '.APP_DESCRIPTION; ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="assets/vendor/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- Custom styles for this template -->
     <link href="assets/css/sticky-footer-navbar.css" rel="stylesheet" />
     <link href="assets/css/style.min.css" rel="stylesheet" />

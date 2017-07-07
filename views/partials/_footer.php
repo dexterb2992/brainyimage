@@ -20,7 +20,7 @@
         }
     </script>
 
-    <script src="assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/vendor/bootstrap/ie10-viewport-bug-workaround.js"></script>
     <script src="assets/vendor/bootstrap-fullscreen-modal/bs-modal-fullscreen.min.js"></script>

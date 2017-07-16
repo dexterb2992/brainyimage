@@ -17,7 +17,7 @@
     }else{
         if( isset($_POST['form_login_submit']) ){
             if( $auth->authenticate($_POST['email'], $_POST['password']) ){
-                header("Refresh:0");
+                echo '<meta http-equiv="refresh" content="0">';
             }else{
                 $_SESSION['auth_errors'] = $auth->errors;
 

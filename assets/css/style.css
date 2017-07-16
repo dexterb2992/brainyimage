@@ -121,3 +121,7 @@ span.size-before {
 #image_difference_modal .modal-title {
     color: rgba(0, 0, 0, 0.54);
 }
+
+.file-before span {
+    word-wrap: break-word;
+}

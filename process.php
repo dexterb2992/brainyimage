@@ -12,6 +12,9 @@ class AjaxProcessImage{
 		$this->brainyImage = new BrainyImage();
 
 		if( isset($_POST['q']) ){
+			foreach ($_POST as $key => $value) {
+				$_POST[$key] = trim($_POST[$key]);
+			}
 			switch ($_POST['q']) {
 				case 'upload':
 					$this->upload($_FILES);
@@ -27,7 +30,7 @@ class AjaxProcessImage{
 					break;
 
 				case 'retry':
-					$this->retry($_POST['src'], basename($_POST['src']));
+					$this->retry($_POST['src'], basename( $_POST['src']) );
 					break;
 			}
 		}

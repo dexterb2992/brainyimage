@@ -16,11 +16,19 @@ function env($key){
 		'pngcrush' => '/usr/bin/pngcrush',
 		'pngout' => '/usr/bin/pngout',
 		'jpegtran' => '/usr/bin/jpegtran',
-		'jpegoptim' => '/usr/local/bin/jpegoptim'
+		'jpegoptim' => '/usr/local/bin/jpegoptim',
+		'DB_NAME' => 'imdog_brainyimage',
+		'DB_HOST' => 'localhost',
+		'DB_USER' => 'imdog_dexter',
+		'DB_PASSWORD' => 'K{Cb~5_p#P)['
 	);
 
 	$local = array(
-		'pngquant' => "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe"
+		'pngquant' => "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe",
+		'DB_NAME' => 'brainyimage',
+		'DB_HOST' => 'localhost',
+		'DB_USER' => 'root',
+		'DB_PASSWORD' => ''
 	);
 
 	if( $_SERVER['HTTP_HOST'] != "localhost" ){

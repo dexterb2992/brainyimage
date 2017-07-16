@@ -17,7 +17,7 @@
     }else{
         if( isset($_POST['form_login_submit']) ){
             if( $auth->authenticate($_POST['email'], $_POST['password']) ){
-                Helper::redirect(Helper::url("index.php"));
+                header("Location: ./index.php");
             }else{
                 $_SESSION['auth_errors'] = $auth->errors;
 

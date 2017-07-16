@@ -33,7 +33,9 @@
 		}
 		
 		if (collect.zone) {  		
-			dragHandle(img_zone);
+			if( img_zone != null ){
+				dragHandle(img_zone);
+			}
 		} 
 		else {
 			alert("Drag & Drop isn't supported, use Open File Browser to upload photos.");			

@@ -93,4 +93,14 @@ class Helper{
 			echo '<span class="badge badge-danger">'.$errors.'</span>';
 		}
 	}
+
+	public static function bcrypt($string){
+		$options = [
+		    'cost' => 12,
+		    'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+		];
+
+		return password_hash($string, PASSWORD_BCRYPT, $options);
+	}
+
 }

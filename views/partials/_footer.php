@@ -24,6 +24,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/vendor/bootstrap/ie10-viewport-bug-workaround.js"></script>
     <script src="assets/vendor/bootstrap-fullscreen-modal/bs-modal-fullscreen.min.js"></script>
-    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>

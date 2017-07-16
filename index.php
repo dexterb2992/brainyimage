@@ -17,7 +17,7 @@
     }else{
         if( isset($_POST['form_login_submit']) ){
             if( $auth->authenticate($_POST['email'], $_POST['password']) ){
-                header("Location: ./index.php");
+                header("Refresh:0");
             }else{
                 $_SESSION['auth_errors'] = $auth->errors;
 

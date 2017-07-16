@@ -11,7 +11,7 @@
 			?>
     		<form id="form_login" method="post" action="./index.php">
     			<div class="form-group">
-    				<label>Email</label>
+    				<label class="text-muted">Email</label>
     				<input type="email" name="email" class="form-control" placeholder="Email address" required />
     				<small class="form-text text-muted">We'll never share your email with anyone else.</small>
     				<?php 
@@ -21,7 +21,7 @@
     				?>
 	    		</div>
 	    		<div class="form-group">
-	    			<label>Password</label>
+	    			<label class="text-muted">Password</label>
 	    			<input type="password" name="password" class="form-control" placeholder="Password" required />
 	    			<?php 
     					if(isset($_SESSION['auth_errors']) && isset($_SESSION['auth_errors']['password'])): 

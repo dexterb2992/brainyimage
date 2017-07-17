@@ -30,7 +30,11 @@ class AjaxProcessImage{
 					break;
 
 				case 'retry':
-					$this->retry($_POST['src'], basename( $_POST['src']) );
+					$this->retry( $_POST['src'], basename($_POST['src']) );
+					break;
+
+				case 'register':
+					$this->register($_POST);
 					break;
 			}
 		}
@@ -54,6 +58,11 @@ class AjaxProcessImage{
 
 	private function retry($src, $filename = ""){
 		return $this->compress($src, $filename);
+	}
+
+	// POST DATA
+	private function register($input){
+		
 	}
 }
 

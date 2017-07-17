@@ -1,6 +1,6 @@
     <footer class="footer bg-bluesh">
         <div class="container">
-            <a href="<?= APP_FOOTER_LINK;?>"><?= APP_FOOTER;?></a> &copy;<?=date('Y');?>
+            <a class="text-muted" href="<?= APP_FOOTER_LINK;?>"><?= APP_FOOTER;?></a> &copy;<?=date('Y');?>
         </div>
     </footer>
 

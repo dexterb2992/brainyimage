@@ -30,6 +30,9 @@
     				?>
 	    		</div>
 	    		<div class="form-group">
+                    <a href="./register.php" class="btn btn-primary pull-left" title="Not a member yet? Register here!">
+                        <i class="fa fa-user"></i> Register
+                    </a>
 	    			<button class="btn btn-success pull-right" name="form_login_submit" value="submit">
 	    				<i class="fa fa-sign-in"></i> Login
 	    			</button>

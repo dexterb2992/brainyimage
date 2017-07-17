@@ -83,14 +83,10 @@ class Helper{
 	public static function showErrors($errors){
 		if( is_array($errors) ){
 			foreach ($errors as $key => $error) {
-				if( $key == "login" ){
-					echo '<div class="alert alert-danger">'.$error.'</div>';
-				}else{
-					echo '<span class="badge badge-danger">'.$error.'</span>';
-				}
+				echo '<div class="alert alert-danger">'.$error.'</div>';
 			}
 		}else if( is_string($errors) ){
-			echo '<span class="badge badge-danger">'.$errors.'</span>';
+			echo '<div class="alert alert-danger">'.$errors.'</div>';
 		}
 	}
 

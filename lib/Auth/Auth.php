@@ -27,9 +27,6 @@ class Auth{
 
 		if ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) $email_errors[] = "The email you entered is not a valid email address.";
 
-		// if( $password == "" ) $pass_errors[] = "The password field is required.";
-		// if( strlen($password) < 6 ) $pass_errors = "The password should be atleast 6 characters.";
-
 		if( count($email_errors) > 0 ) $this->errors["email"] = $email_errors;
 		if( count($email_errors) == 0 )
 			return true;

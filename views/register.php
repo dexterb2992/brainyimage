@@ -5,14 +5,19 @@
     		<h4 class="text-success">Register</h4>
     		<hr/>
     		<?php 
-				if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['login'])): 
-					App\lib\Helper::showErrors($_SESSION['reg_errors']['login']);
+				if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['register'])): 
+					App\lib\Helper::showErrors($_SESSION['reg_errors']['register']);
 				endif;
+                $has_last_input = false;
+                if( isset($_SESSION['last_inputs']) ){
+                    $has_last_input = true;
+                    $last_inputs = $_SESSION['last_inputs'];
+                }
 			?>
     		<form id="form_register" method="post" action="./register.php">
     			<div class="form-group">
     				<label class="text-muted">Name</label>
-    				<input type="text" name="name" class="form-control" placeholder="Name" required />
+    				<input type="text" name="name" class="form-control" placeholder="Name" value="<?= $has_last_input ? $last_inputs['name'] : ''; ?>" required />
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['name'])): 
     						App\lib\Helper::showErrors($_SESSION['reg_errors']['name']);
@@ -22,7 +27,7 @@
 
     			<div class="form-group">
     				<label class="text-muted">Email</label>
-    				<input type="email" name="email" class="form-control" placeholder="Email address" required />
+    				<input type="email" name="email" class="form-control" placeholder="Email address" value="<?= $has_last_input ? $last_inputs['email'] : ''; ?>" required />
     				<small class="form-text text-muted">We'll never share your email with anyone else.</small>
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['email'])): 
@@ -53,7 +58,7 @@
 
     			<div class="form-group">
     				<label class="text-muted">License Key</label>
-    				<input type="text" name="license_key" class="form-control" placeholder="License Key" required />
+    				<input type="text" name="license_key" class="form-control" placeholder="License Key" value="<?= $has_last_input ? $last_inputs['license_key'] : ''; ?>" required />
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['license_key'])): 
     						App\lib\Helper::showErrors($_SESSION['reg_errors']['license_key']);

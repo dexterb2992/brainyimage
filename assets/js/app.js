@@ -98,6 +98,10 @@
 			$modal.modal();
 		});
 
+		$('#btn_avatar').on("change", function (){
+			readURL(this, $("#avatar_preview"));
+		});	
+
 		$(".btn-file").click(function (){
 			$("#file_handle").click();
 		});
@@ -334,4 +338,16 @@
 
        	return $entry;
 	}
+
+ 	function readURL(input, $targetImage) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $targetImage.attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 }));

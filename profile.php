@@ -19,17 +19,18 @@ class ProfileController{
 		if( isset($_SESSION['user']) && $_SESSION['user'] != null ){
 			if( isset($_POST['q']) ){
 				$inputs = $_POST;
+				$_SESSION['last_inputs'] = $inputs;
 				$res = $this->updateUser($inputs, $inputs['q']);
-				var_dump($inputs);
+				
 			}
-
-			
 
 		    include "views/profile.php";
 		}
 
 		echo '<br/><br/>';
 		if( isset($_SESSION['_errors']) ) unset($_SESSION['_errors']);
+		if( isset($_SESSION['last_inputs']) ) unset($_SESSION['last_inputs']);
+		if( isset($_SESSION['_flash_message']) ) unset($_SESSION['_flash_message']);
 
 		include "views/partials/_footer.php"; 
 	}
@@ -40,25 +41,30 @@ class ProfileController{
 			$inputs[$key] = mysqli_escape_string($this->auth->conn, trim($input));
 		}
 		$sql = "";
+		
 		switch ($update_type) {
 			case 'update_password':
-				if( $this->validate( $inputs, 'update_password' ) ){
+				if( $this->validate( $inputs, $update_type ) ){
 					$pass = Helper::bcrypt($inputs['password']);
-					$sql = "UPDATE users SET password='$pass' WHERE id=".$this->auth->user['id'];
+					$sql = "UPDATE users SET password='$pass' WHERE id=".$_SESSION['user']['id'];
 				}
-				break;
+				return false;
+				// break;
 			
 			case 'general':
-				if( $this->validate( $inputs, 'general' ) ){
-					$pass = Helper::bcrypt($inputs['password']);
+				if( $this->validate( $inputs, $update_type ) ){
 					$sql = "UPDATE users SET name='".$inputs['name']."', access_key='".$inputs['access_key']."'
-						 WHERE id=".$this->auth->user['id'];
+						 WHERE id=".$_SESSION['user']['id'];
 				}
-				break;
+				return false;
+				// break;
 		}
 
-		if( isset($sql) ){
+		
+		if( $sql != "" ){
 			$res = mysqli_query($this->auth->conn, $sql);
+			$_SESSION['_flash_message'] = "Your changes have been saved.";
+			if( $res ) $this->getUser($_SESSION['user']['id']);
 		}else{
 			$_SESSION['_errors']['profile'] = "Sorry, we can't save your changes right now. Please try again later.";
 		}
@@ -66,17 +72,24 @@ class ProfileController{
 		return false;
 	}
 
-	function validate($inputs, $post_type){
+	function getUser($id){
+		$sql = "SELECT * FROM users WHERE id=$id LIMIT 1";
+		if ($result = mysqli_query($this->auth->conn, $sql)){
+			$_SESSION['user'] = $result->fetch_assoc();
+		} 
+	}
+
+	function validate($inputs, $update_type){
 		$errors = array();
 		foreach ($inputs as $key => $value):
 			if( $inputs[$key] == "" ) $errors[$key][] = "This $key field is required."; 
 		endforeach;
 
 		
-		switch ($post_type) {
+		switch ($update_type) {
 			case 'update_password':
 				// confirm old password
-				if( !password_verify($inputs['old_password'], $this->auth->user['password']) ){
+				if( !password_verify($inputs['old_password'], $_SESSION['user']['password']) ){
 					$errors['old_password'][] = "Your old password is incorrect.";
 				}
 

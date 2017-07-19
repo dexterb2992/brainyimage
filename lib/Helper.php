@@ -80,15 +80,16 @@ class Helper{
 		return $scheme."://$host/$path";
 	}
 
-	public static function showErrors($errors){
+	public static function showErrors($errors, $custom_class = 'danger'){
 		if( is_array($errors) ){
 			foreach ($errors as $key => $error) {
-				echo '<div class="alert alert-danger">'.$error.'</div>';
+				echo '<div class="alert alert-'.$custom_class.'">'.$error.'</div>';
 			}
 		}else if( is_string($errors) ){
-			echo '<div class="alert alert-danger">'.$errors.'</div>';
+			echo '<div class="alert alert-'.$custom_class.'">'.$errors.'</div>';
 		}
 	}
+
 
 	public static function bcrypt($string){
 		$options = [

@@ -45,7 +45,6 @@ class Auth{
 				$user = $result->fetch_assoc();
 				if( password_verify($password, $user['password'])){
 					$this->user = $user;
-					unset($this->user['password']);
 					$_SESSION['user'] = $this->user;
 					return true;
 				}else{

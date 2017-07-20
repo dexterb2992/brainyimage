@@ -100,4 +100,50 @@ class Helper{
 		return password_hash($string, PASSWORD_BCRYPT, $options);
 	}
 
+	public static function upload($file, $target_dir){
+		$filename = preg_replace( '/[^a-z0-9.]+/', '_', strtolower( $file['name'] ) );
+
+		$file_size =$file['size'];
+		$file_tmp =$file['tmp_name'];
+		$file_type=$file['type'];
+
+		$extensions = array("image/jpeg","image/png");
+
+		$var = explode('.',$filename);
+		$file_ext = strtolower($var[1]);
+
+		$target = $target_dir.$filename;
+
+		$results = array();
+		$error = null;
+
+		if(in_array($file_type, $extensions ) === true)
+		{
+			if(move_uploaded_file($file_tmp, $target))
+			{
+				
+				$results = array(
+					"success" => 1, 
+					"url" => $target,
+					"filename" => $filename
+				);
+			}else
+				$error = 'Error in uploading few files. Some files couldn\'t be uploaded.';				
+		}else{
+			$error = 'Error in uploading few files. File type is not allowed.';
+		}
+		$results['info'] = $file_tmp;
+		$results['filetype'] = $file_type;
+		
+
+		if( $error != "" ){
+			$results["error"] = $error;
+			$results['success'] = 0;
+			
+		}
+		
+
+		return $results;	
+	}
+
 }

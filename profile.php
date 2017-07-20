@@ -21,7 +21,6 @@ class ProfileController{
 				$inputs = $_POST;
 				$_SESSION['last_inputs'] = $inputs;
 				$res = $this->updateUser($inputs, $inputs['q']);
-				
 			}
 
 		    include "views/profile.php";
@@ -41,23 +40,27 @@ class ProfileController{
 			$inputs[$key] = mysqli_escape_string($this->auth->conn, trim($input));
 		}
 		$sql = "";
-		
-		switch ($update_type) {
-			case 'update_password':
+
+		if( $update_type == 'update_password' ){
 				if( $this->validate( $inputs, $update_type ) ){
 					$pass = Helper::bcrypt($inputs['password']);
 					$sql = "UPDATE users SET password='$pass' WHERE id=".$_SESSION['user']['id'];
-				}
-				return false;
-				// break;
-			
-			case 'general':
+				}		
+		}else if( $update_type == 'general' ){
 				if( $this->validate( $inputs, $update_type ) ){
 					$sql = "UPDATE users SET name='".$inputs['name']."', access_key='".$inputs['access_key']."'
 						 WHERE id=".$_SESSION['user']['id'];
 				}
-				return false;
-				// break;
+		}else if( $update_type == "avatar" ){
+			$upload_res = Helper::upload($_FILES['avatar'], './assets/images/avatar/');
+			if( is_array($upload_res) ){
+				if( $upload_res['success'] == 1 ){
+					$sql = "UPDATE users SET avatar='".$upload_res['url']."' WHERE id=".$_SESSION['user']['id'];
+				}else{
+					$_SESSION['_errors']['profile'] = "An error has occured while tring to upload your image..";
+					return false;
+				}
+			}
 		}
 
 		
@@ -65,9 +68,13 @@ class ProfileController{
 			$res = mysqli_query($this->auth->conn, $sql);
 			$_SESSION['_flash_message'] = "Your changes have been saved.";
 			if( $res ) $this->getUser($_SESSION['user']['id']);
+				return true;
+			$_SESSION['_errors']['profile'] = "An error has occured while tring to save your changes..";
+
 		}else{
 			$_SESSION['_errors']['profile'] = "Sorry, we can't save your changes right now. Please try again later.";
 		}
+
 
 		return false;
 	}

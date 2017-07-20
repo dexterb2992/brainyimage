@@ -2,6 +2,15 @@
 	brainyImage(window, document, window.jQuery);
 }(function brainyImage(window, document, $){
 	$(function (){
+		// for flash messages
+		if($(".alert.alert-success").length > 0){
+   			setTimeout(function() {
+   				$(".alert.alert-success").fadeOut(function (){
+   					$(this).remove();
+   				});
+   			}, 7000);
+		}
+
 		var img_zone = document.getElementById('img-zone'),	
 			collect = {
 				filereader: typeof FileReader != 'undefined',

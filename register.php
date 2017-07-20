@@ -19,7 +19,7 @@ class RegisterController{
 		$this->auth = $auth;
 
 		if( isset($_SESSION['user']) && $_SESSION['user'] != null ){
-		    echo '<meta http-equiv="refresh" content="0; url=./index.php">';
+		    Helper::redirect('./index.php');
 		}else{
 		    if( isset($_POST['form_register_submit']) ){
 		    	$res = $this->register($_POST);

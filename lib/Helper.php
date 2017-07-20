@@ -71,7 +71,11 @@ class Helper{
 
 	// redirect to spefic url
 	public static function redirect($url){
-		echo '<script>window.location.href="'+$url+'";</script>';
+		echo '<meta http-equiv="refresh" content="0; url='.$url.'">';
+	}
+
+	public static function refreshPage(){
+		echo '<meta http-equiv="refresh" content="0">';
 	}
 
 	public static function url($path){

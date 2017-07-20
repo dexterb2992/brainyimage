@@ -24,6 +24,8 @@ class ProfileController{
 			}
 
 		    include "views/profile.php";
+		}else{
+			Helper::redirect('./index.php');
 		}
 
 		echo '<br/><br/>';

@@ -7,6 +7,7 @@ define('APP_KEYWORDS', 'image optimizer, compress image, reduce image filesize')
 define('APP_AUTHOR', 'TopDogIMSolutions');
 define('APP_FOOTER', 'TopDogIMSolutions.com');
 define('APP_FOOTER_LINK', 'http://topdogimsolutions.com');
+define('LICENSE_LINK', 'http://topdogimsolutions.com/licensing/index.php');
 
 function env($key){
 	// live

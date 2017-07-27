@@ -90,7 +90,7 @@ class RegisterController{
 		// password confirmation
 		if( $inputs['password_confirmation'] != $inputs['password'] ) $errors['password_confirmation'][] = "Your passwords do not match.";
 
-		if( !$this->checkLicenseKey($inputs['license_key'], $inputs['email']) ) $erros['license_key'][] = "Sorry, we can't find the license and email that you entered on our records.";
+		if( !$this->checkLicenseKey($inputs['license_key'], $inputs['email']) ) $errors['license_key'][] = "Sorry, we can't find the license and email that you entered on our records.";
 
 		if( count($errors) > 0 ){
 			$_SESSION['reg_errors'] = $errors;
@@ -102,7 +102,16 @@ class RegisterController{
 	}
 
 	function checkLicenseKey($key, $email){
-		return true;
+		// return true;
+		$url = LICENSE_LINK."?licensekey=$key&email=$email&pl_type=brainyimage&domainname=".$_SERVER['HTTP_HOST'];
+		$data = file_get_contents($url);
+		if( $data != '' ){
+			$res = json_decode($data);
+			if( $res !== false && $res->valid == 1 )
+				return true;
+		}
+
+		return false;
 	}
 }
 

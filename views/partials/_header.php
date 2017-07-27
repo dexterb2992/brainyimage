@@ -10,6 +10,18 @@
 
     <title><?= APP_NAME.' - '.APP_DESCRIPTION; ?></title>
 
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="<?= APP_NAME.' - '.APP_DESCRIPTION; ?>"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content="<?= APP_NAME; ?>"/>
+    <meta property="og:description" content="<?= APP_DESCRIPTION; ?>"/>
+
+    <meta name="twitter:title" content="<?= APP_NAME.' - '.APP_DESCRIPTION; ?>" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Fontawesome -->

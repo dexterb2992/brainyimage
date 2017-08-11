@@ -50,6 +50,11 @@
 			    			<div class="form-group">
 			    				<label class="text-muted">License Key</label>
 			    				<input type="text" name="access_key" value="<?= $user['access_key']; ?>" class="form-control" required />
+			    				<?php 
+			    					if(isset($_SESSION['_errors']) && isset($_SESSION['_errors']['access_key'])): 
+			    						App\lib\Helper::showErrors($_SESSION['_errors']['access_key']);
+			    					endif;
+			    				?>
 			    			</div>
 			    			<div class="form-group">
 			    				<label class="text-muted">Membership Type</label>

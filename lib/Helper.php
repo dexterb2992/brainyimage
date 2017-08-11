@@ -150,4 +150,17 @@ class Helper{
 		return $results;	
 	}
 
+	public static function checkLicenseKey($key, $email){
+		// return true;
+		$url = LICENSE_LINK."?licensekey=$key&email=$email&pl_type=brainyimage&domainname=".$_SERVER['HTTP_HOST'];
+		$data = file_get_contents($url);
+		if( $data != '' ){
+			$res = json_decode($data);
+			if( $res !== false && $res->valid == 1 )
+				return true;
+		}
+
+		return false;
+	}
+
 }

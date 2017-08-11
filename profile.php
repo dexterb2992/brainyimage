@@ -109,7 +109,7 @@ class ProfileController{
 				break;
 			
 			case 'general':
-				if( !$this->checkLicenseKey($inputs['access_key'], $inputs['email']) ) $errors['access_key'][] = "Sorry, we can't find the license and email that you entered on our records.";
+				if( !Helper::checkLicenseKey($inputs['access_key'], $inputs['email']) ) $errors['access_key'][] = "Sorry, we can't find the license and email that you entered on our records.";
 				break;
 
 		}		
@@ -119,10 +119,6 @@ class ProfileController{
 			return false;
 		}
 
-		return true;
-	}
-
-	function checkLicenseKey($key, $email){
 		return true;
 	}
 }

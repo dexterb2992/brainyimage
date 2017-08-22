@@ -1,6 +1,6 @@
     <footer class="footer <?= APP_THEME; ?>">
         <div class="container">
-            <a class="text-muted" href="<?= APP_FOOTER_LINK;?>"><?= APP_FOOTER;?></a> &copy;<?=date('Y');?>
+            <a style="text-decoration: none;" href="<?= APP_FOOTER_LINK;?>"><?= APP_FOOTER.' &copy;'.date('Y'); ?></a>
         </div>
     </footer>
 

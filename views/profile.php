@@ -39,16 +39,16 @@
 		    		<div class="tab-content">
 		    			<form id="form_profile" class="tab-pane <?= !isset($last_q_value) ? 'active' : $last_q_value == 'general' ? 'active' : ''?>" role="tabpanel" method="post" action="./profile.php">
 			    			<div class="form-group">
-			    				<label class="text-muted">Name</label>
+			    				<label>Name</label>
 			    				<input type="text" name="name" value="<?= $user['name']; ?>" class="form-control" required/>
 			    			</div>
 			    			<div class="form-group">
-			    				<label class="text-muted">Email</label>
+			    				<label>Email</label>
 			    				<input type="email" name="email" value="<?= $user['email']; ?>" class="form-control" readonly/>
 			    				<small class="form-text text-muted">Your email address can't be changed.</small>
 			    			</div>
 			    			<div class="form-group">
-			    				<label class="text-muted">License Key</label>
+			    				<label>License Key</label>
 			    				<input type="text" name="access_key" value="<?= $user['access_key']; ?>" class="form-control" required />
 			    				<?php 
 			    					if(isset($_SESSION['_errors']) && isset($_SESSION['_errors']['access_key'])): 
@@ -57,7 +57,7 @@
 			    				?>
 			    			</div>
 			    			<div class="form-group">
-			    				<label class="text-muted">Membership Type</label>
+			    				<label>Membership Type</label>
 			    				<input type="text" value="<?= ucfirst($user['subscription_type']); ?>" class="form-control" readonly/>
 			    			</div>
 			    			<input type="hidden" name="q" value="general" />
@@ -70,7 +70,7 @@
 
 			    		<form id="form_password" class="tab-pane <?= isset($last_q_value) && $last_q_value == 'update_password' ? 'active' : '' ?>" role="tabpanel" method="post" action="./profile.php">
 			    			<div class="form-group">
-				    			<label class="text-muted">New Password</label>
+				    			<label>New Password</label>
 				    			<input type="password" name="password" class="form-control" placeholder="Password" required />
 				    			<?php 
 			    					if(isset($_SESSION['_errors']) && isset($_SESSION['_errors']['password'])): 
@@ -80,7 +80,7 @@
 				    		</div>
 
 				    		<div class="form-group">
-			    				<label class="text-muted">Confirm Password</label>
+			    				<label>Confirm Password</label>
 			    				<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required />
 			    				<?php 
 			    					if(isset($_SESSION['_errors']) && isset($_SESSION['_errors']['password_confirmation'])): 
@@ -90,7 +90,7 @@
 			    			</div>
 
 			    			<div class="form-group">
-			    				<label class="text-muted">Old Password</label>
+			    				<label>Old Password</label>
 			    				<input type="password" name="old_password" class="form-control" placeholder="Old Password" required />
 			    				<small class="form-text text-muted">Please enter your old password.</small>
 			    				<?php 

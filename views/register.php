@@ -16,7 +16,7 @@
 			?>
     		<form id="form_register" method="post" action="./register.php">
     			<div class="form-group">
-    				<label class="text-muted">Name</label>
+    				<label>Name</label>
     				<input type="text" name="name" class="form-control" placeholder="Name" value="<?= $has_last_input ? $last_inputs['name'] : ''; ?>" required />
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['name'])): 
@@ -26,7 +26,7 @@
     			</div>
 
     			<div class="form-group">
-    				<label class="text-muted">Email</label>
+    				<label>Email</label>
     				<input type="email" name="email" class="form-control" placeholder="Email address" value="<?= $has_last_input ? $last_inputs['email'] : ''; ?>" required />
     				<small class="form-text text-muted">We'll never share your email with anyone else.</small>
     				<?php 
@@ -37,7 +37,7 @@
 	    		</div>
 
 	    		<div class="form-group">
-	    			<label class="text-muted">Password</label>
+	    			<label>Password</label>
 	    			<input type="password" name="password" class="form-control" placeholder="Password" required />
 	    			<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['password'])): 
@@ -47,7 +47,7 @@
 	    		</div>
 
 	    		<div class="form-group">
-    				<label class="text-muted">Confirm Password</label>
+    				<label>Confirm Password</label>
     				<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required />
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['password_confirmation'])): 
@@ -57,7 +57,7 @@
     			</div>
 
     			<div class="form-group">
-    				<label class="text-muted">License Key</label>
+    				<label>License Key</label>
     				<input type="text" name="license_key" class="form-control" placeholder="License Key" value="<?= $has_last_input ? $last_inputs['license_key'] : ''; ?>" required />
     				<?php 
     					if(isset($_SESSION['reg_errors']) && isset($_SESSION['reg_errors']['license_key'])): 

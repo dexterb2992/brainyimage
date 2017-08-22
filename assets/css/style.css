@@ -1,15 +1,4 @@
-body {
-    color: white;
-    text-shadow: 1px 1px 4px black;
-}
-p, a:not(.btn), span:not(.btn,.navbar-toggler-icon,.nav-link), label, h1, h2, h3, h4, h5, strong, div.form-group label {
-    -webkit-filter: invert(80%);
-    filter: invert(80%);
-}
-label {
-    -webkit-filter: invert(80%) !important;
-    filter: invert(80%) !important;
-}
+/*themes*/
 .relaxingred{
     background: #fffbd5;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #b20a2c, #fffbd5);  /* Chrome 10-25, Safari 5.1-6 */
@@ -107,6 +96,26 @@ label {
     background: #CC95C0;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+body {
+    color: white;
+    text-shadow: 1px 1px 4px black;
+}
+p, a:not(.btn), span:not(.btn,.navbar-toggler-icon,.nav-link), label, h1, h2, h3, h4, h5, strong, div.form-group label {
+    -webkit-filter: invert(80%);
+    filter: invert(80%);
+}
+label {
+    -webkit-filter: invert(80%) !important;
+    filter: invert(80%) !important;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-right-radius: .25rem;
+    border-top-left-radius: .25rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 nav.navbar {

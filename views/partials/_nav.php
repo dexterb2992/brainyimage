@@ -2,7 +2,7 @@
     <div class="masthead">
        <h3 class="text-muted"><?= APP_NAME; ?></h3>
 
-        <nav class="navbar navbar-light bg-faded rounded mb-3 bg-bluesh">
+        <nav class="navbar navbar-light bg-faded">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

@@ -102,11 +102,11 @@ body {
     color: white;
     text-shadow: 1px 1px 4px black;
 }
-p, a:not(.btn), span:not(.btn,.navbar-toggler-icon,.nav-link), label, h1, h2, h3, h4, h5, strong, div.form-group label {
+a:not(.btn), span:not(.btn,.navbar-toggler-icon,.nav-link){
     -webkit-filter: invert(80%);
     filter: invert(80%);
 }
-label {
+label,h1, h2, h3, h4, h5, h6,p,strong {
     -webkit-filter: invert(80%) !important;
     filter: invert(80%) !important;
 }

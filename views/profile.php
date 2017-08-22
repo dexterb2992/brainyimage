@@ -114,9 +114,9 @@
 			    			<div class="form-group">
 			    				<input type="file" name="avatar" style="display: none;" id="btn_avatar" accept="image/*" required />
 			    				<input type="hidden" name="q" value="avatar" />
-			    				<a class="btn btn-primary btn-sm" id="browse_avatar" onclick="document.getElementById('btn_avatar').click();">
+			    				<button type="button" class="btn btn-primary btn-sm" id="browse_avatar" onclick="document.getElementById('btn_avatar').click();">
 			    					<i class="fa fa-image"></i> Browse
-			    				</a>
+			    				</button>
 			    				<button class="btn btn-success btn-sm" type="submit" name="form_avatar_submit" value="submit">
 			    					<i class="fa fa-check"></i> Save changes
 			    				</button>

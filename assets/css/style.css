@@ -1,3 +1,7 @@
+body {
+    color: white;
+    text-shadow: 1px 1px 4px black;
+}
 .relaxingred{
     background: #fffbd5;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #b20a2c, #fffbd5);  /* Chrome 10-25, Safari 5.1-6 */

@@ -38,3 +38,27 @@ function env($key){
 
 	return $key == "" ? $local : $local[$key];
 }
+
+$themes = [
+	"relaxingred",
+	"digitalwater",
+	"velvet",
+	"brokenhearts",
+	"sulphur",
+	"comparenow",
+	"honeydew",
+	"jaiphur",
+	"tranquil",
+	"instagram",
+	"martini",
+	"neonlife",
+	"teallove",
+	"almost",
+	"borabora",
+	"mangopulp",
+	"noontodusk",
+	"hazel",
+	"motecarlo"
+];
+
+define('APP_THEME', $themes[array_rand($themes, 1)]);

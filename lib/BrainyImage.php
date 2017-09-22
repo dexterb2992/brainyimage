@@ -4,6 +4,9 @@ namespace App\lib;
 use App\lib\traits\ImageCompressor;
 use App\lib\Helper;
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
 class BrainyImage
 {
     use ImageCompressor;

@@ -1,7 +1,6 @@
 <?php
-namespace App;
 
-error_reporting(1);
+namespace App;
 
 require_once "conf.php";
 

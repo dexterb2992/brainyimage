@@ -37,14 +37,19 @@ class PNGQuant
         "99" => "TOO_LOW_QUALITY"
     );
 
-    function __construct(){}
+    function __construct()
+    {
+        //
+    }
 
-    function setBinaryPath($pathToBinary){
+    function setBinaryPath($pathToBinary)
+    {
         $this->_binaryPath = escapeshellarg($pathToBinary);
         return $this;
     }
 
-    function setOption($key, $value = null , $space = false, $isPath = false){
+    function setOption($key, $value = null, $space = false, $isPath = false)
+    {
         $length_options = count($this->_options);
 
         // Overwrite an option if it was already set
@@ -66,7 +71,8 @@ class PNGQuant
         return $this;
     }
 
-    function buildCommand(){
+    function buildCommand()
+    {
         $_command = $this->_binaryPath. " ". $this->_imagePath;
 
         foreach($this->_options as $option){
@@ -98,59 +104,72 @@ class PNGQuant
 
     /** Start wrapper **/
 
-    function disableDithering(){
+    function disableDithering()
+    {
         return $this->setOption('--nofs');
     }
 
-    function getErrorTable(){
+    function getErrorTable()
+    {
         return $this->_errorTable;
     }
 
-    function setImage($imagePath){
+    function setImage($imagePath)
+    {
         $this->_imagePath = $imagePath;
         return $this;
     }
 
-    function setCustomExtension($extension){
+    function setCustomExtension($extension)
+    {
         return $this->setOption('--ext',$extension, true, true);
     }
 
-    function setDitheringLevel($level){
+    function setDitheringLevel($level)
+    {
         return $this->setOption('--floyd', $level);
     }
 
-    function skipIfLarger(){
+    function skipIfLarger()
+    {
         return $this->setOption('--skip-if-larger');
     }
 
-    function setQuality($min_quality = 60, $max_quality = 80){
+    function setQuality($min_quality = 60, $max_quality = 80)
+    {
         return $this->setOption('--quality', "$min_quality-$max_quality", true);
     }
 
-    function setOutputImage($imagePath){
+    function setOutputImage($imagePath)
+    {
         return $this->setOption('--output', $imagePath, true, true);
     }
 
-    function setSpeed($speed){
+    function setSpeed($speed)
+    {
         return $this->setOption('--speed', $speed, true);
     }
 
-    function overwriteExistingFile(){
+    function overwriteExistingFile()
+    {
         return $this->setOption('--force');
     }
 
-    function posterize($value){
+    function posterize($value)
+    {
         return $this->setOption('--posterize', $value);
     }
 
-    function removeMetadata(){
+    function removeMetadata()
+    {
         return $this->setOption('--strip');
     }
 
     /**
      * Run the built command
      */
-    function execute(){
+    function execute()
+    {
         $consoleInstruction = $this->buildCommand();
         $output = null;
 
@@ -163,7 +182,8 @@ class PNGQuant
      * Execute PNGQUANT with the providen commands and retrieve the generated image 
      * directly into a variable
      */
-    function getRawOutput(){
+    function getRawOutput()
+    {
         // Create a temporal file in the system
         $fileName = uniqid().'.png';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);

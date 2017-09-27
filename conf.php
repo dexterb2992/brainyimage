@@ -9,56 +9,57 @@ define('APP_FOOTER', 'TopDogIMSolutions.com');
 define('APP_FOOTER_LINK', 'http://topdogimsolutions.com');
 define('LICENSE_LINK', 'http://topdogimsolutions.com/licensing/index.php');
 
-function env($key){
-	// live
-	$live = array(
-		'pngquant' => '/usr/local/bin/pngquant',
-		'optipng' => '/usr/local/bin/optipng',
-		'pngcrush' => '/usr/bin/pngcrush',
-		'pngout' => '/usr/bin/pngout',
-		'jpegtran' => '/usr/bin/jpegtran',
-		'jpegoptim' => '/usr/local/bin/jpegoptim',
-		'DB_NAME' => 'imdog_brainyimage',
-		'DB_HOST' => 'localhost',
-		'DB_USER' => 'imdog_dexter',
-		'DB_PASSWORD' => 'K{Cb~5_p#P)['
-	);
+function env($key)
+{
+    // live
+    $live = array(
+        'pngquant' => '/usr/local/bin/pngquant',
+        'optipng' => '/usr/local/bin/optipng',
+        'pngcrush' => '/usr/bin/pngcrush',
+        'pngout' => '/usr/bin/pngout',
+        'jpegtran' => '/usr/bin/jpegtran',
+        'jpegoptim' => '/usr/local/bin/jpegoptim',
+        'DB_NAME' => 'imdog_brainyimage',
+        'DB_HOST' => 'localhost',
+        'DB_USER' => 'imdog_dexter',
+        'DB_PASSWORD' => 'K{Cb~5_p#P)['
+    );
 
-	$local = array(
-		'pngquant' => "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe",
-		'DB_NAME' => 'brainyimage',
-		'DB_HOST' => 'localhost',
-		'DB_USER' => 'root',
-		'DB_PASSWORD' => ''
-	);
+    $local = array(
+        'pngquant' => "E:\\wamp64\\www\\brainyimage\\pngquant\\pngquant.exe",
+        'DB_NAME' => 'brainyimage',
+        'DB_HOST' => 'localhost',
+        'DB_USER' => 'root',
+        'DB_PASSWORD' => ''
+    );
 
-	if( $_SERVER['HTTP_HOST'] != "localhost" ){
-		return $key == "" ? $live : $live[$key];
-	}
+    if ($_SERVER['HTTP_HOST'] != "localhost") {
+        return $key == "" ? $live : $live[$key];
+    }
 
-	return $key == "" ? $local : $local[$key];
+    return $key == "" ? $local : $local[$key];
 }
 
 $themes = [
-	"relaxingred",
-	"digitalwater",
-	"velvet",
-	"brokenhearts",
-	"sulphur",
-	"comparenow",
-	"honeydew",
-	"jaiphur",
-	"tranquil",
-	"instagram",
-	"martini",
-	"neonlife",
-	"teallove",
-	"almost",
-	"borabora",
-	"mangopulp",
-	"noontodusk",
-	"hazel",
-	"motecarlo"
+    "relaxingred",
+    "digitalwater",
+    "velvet",
+    "brokenhearts",
+    "sulphur",
+    "comparenow",
+    "honeydew",
+    "jaiphur",
+    "tranquil",
+    "instagram",
+    "martini",
+    "neonlife",
+    "teallove",
+    "almost",
+    "borabora",
+    "mangopulp",
+    "noontodusk",
+    "hazel",
+    "motecarlo"
 ];
 
 define('APP_THEME', $themes[array_rand($themes, 1)]);
